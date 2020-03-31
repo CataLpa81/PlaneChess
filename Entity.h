@@ -43,7 +43,11 @@ class PlanePool
 {
 public:
 	//µ¥ÀýÄ£Ê½
-	static PlanePool& instance();
+	static PlanePool* instance()
+	{
+		static PlanePool* instance = new PlanePool();
+		return instance;
+	}
 	void Update();
 	void Rander();
 	RedPlane* redplane[4];
@@ -59,7 +63,6 @@ class RedPlane : public Plane
 {
 public:
 	RedPlane() {
-		
 		this->texture.loadFromFile("./data/Entity/red_player.png");
 		this->sprite.setTexture(this->texture);
 		this->sprite.setOrigin(this->texture.getSize().x / 2, this->texture.getSize().y / 2);
@@ -70,7 +73,6 @@ class YellowPlane : public Plane
 {
 public:
 	YellowPlane() {
-		
 		this->texture.loadFromFile("./data/Entity/yellow_player.png");
 		this->sprite.setTexture(this->texture);
 		this->sprite.setOrigin(this->texture.getSize().x / 2, this->texture.getSize().y / 2);
@@ -82,7 +84,6 @@ class BluePlane : public Plane
 {
 public:
 	BluePlane() {
-		
 		this->texture.loadFromFile("./data/Entity/blue_player.png");
 		this->sprite.setTexture(this->texture);
 		this->sprite.setOrigin(this->texture.getSize().x / 2, this->texture.getSize().y / 2);
@@ -94,7 +95,6 @@ class GreenPlane : public Plane
 {
 public:
 	GreenPlane() {
-	
 		this->texture.loadFromFile("./data/Entity/green_player.png");
 		this->sprite.setTexture(this->texture);
 		this->sprite.setOrigin(this->texture.getSize().x / 2, this->texture.getSize().y / 2);

@@ -14,12 +14,12 @@ sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "CataLpa");
 
 Texture tbk;
 Sprite spbk;
-PlanePool* planepool;
 
+ChessBoard* chessboard = ChessBoard::instance();
+PlanePool* planepool = PlanePool::instance();
 
 void Initial()
 {
-	planepool=&PlanePool::instance();
 	window.setFramerateLimit(30);
 	tbk.loadFromFile("./data/background/sky.jpg");
 	spbk.setTexture(tbk);

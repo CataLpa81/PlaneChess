@@ -2,8 +2,6 @@
 #include<iostream>
 #include<fstream>
 
-ChessBoard* chessboard = new ChessBoard();
-
 ChessBoard::ChessBoard()
 {
 	this->getdata();

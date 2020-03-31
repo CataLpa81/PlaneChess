@@ -25,11 +25,6 @@ void Plane::move(int step)
 	
 }
 
-PlanePool& PlanePool::instance()
-{
-	static PlanePool* instance = new PlanePool();
-	return *instance;
-}
 
 void PlanePool::Rander()
 {

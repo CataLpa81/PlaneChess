@@ -26,11 +26,18 @@ public:
 class ChessBoard
 {
 public:
-	ChessBoard();
+	//µ¥ÀýÄ£Ê½
+	static ChessBoard* instance()
+	{
+		static ChessBoard* instance = new ChessBoard();
+		return instance;
+	}
 	Texture texture;
 	Sprite sprite;
 	block blocks[76];
 	void getdata();
+private:
+	ChessBoard();
 };
 
 #endif // !CHESSBOARD_H

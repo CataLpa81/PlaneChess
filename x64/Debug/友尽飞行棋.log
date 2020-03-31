@@ -13,32 +13,32 @@ C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Entity.h(64,52): warnin
           [
               T=unsigned int
           ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Entity.h(75,83): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Entity.h(74,83): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
           with
           [
               T=unsigned int
           ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Entity.h(75,52): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Entity.h(74,52): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
           with
           [
               T=unsigned int
           ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Entity.h(87,83): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Entity.h(85,83): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
           with
           [
               T=unsigned int
           ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Entity.h(87,52): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Entity.h(85,52): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
           with
           [
               T=unsigned int
           ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Entity.h(99,83): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Entity.h(96,83): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
           with
           [
               T=unsigned int
           ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Entity.h(99,52): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Entity.h(96,52): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
           with
           [
               T=unsigned int
