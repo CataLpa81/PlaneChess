@@ -1,4 +1,7 @@
 #pragma once
+#ifndef CHESSBOARD_H
+#define CHESSBOARD_H
+
 
 #include<iostream>
 #include<SFML/Audio.hpp>
@@ -7,20 +10,18 @@
 #include"Entity.h"
 using namespace sf;
 
-
+extern class Entity;
+extern class ChessBoard;
+extern ChessBoard* chessboard;
 
 class block
 {
 public:
+	int rotation;
 	int x, y;
-	
-
+	Entity* entity;
 };
 
-class BackGround
-{
-
-};
 
 class ChessBoard
 {
@@ -32,3 +33,4 @@ public:
 	void getdata();
 };
 
+#endif // !CHESSBOARD_H

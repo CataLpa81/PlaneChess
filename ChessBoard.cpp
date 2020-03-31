@@ -2,11 +2,12 @@
 #include<iostream>
 #include<fstream>
 
-
+ChessBoard* chessboard = new ChessBoard();
 
 ChessBoard::ChessBoard()
 {
 	this->getdata();
+	this->sprite.setPosition(50, 100);
 }
 
 void ChessBoard::getdata()
@@ -19,9 +20,9 @@ void ChessBoard::getdata()
 	{
 		infile >> a;
 		std::cout << a << " ";
-		this->blocks[i].x = a;
+		blocks[i].x = a;
 		infile >> a;
-		this->blocks[i].y = a;
+		blocks[i].y = a;
 	}
 }
 

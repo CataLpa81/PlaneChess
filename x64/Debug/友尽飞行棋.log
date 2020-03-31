@@ -1,4 +1,48 @@
-﻿  ChessBoard.cpp
-  main.cpp
-  正在生成代码...
+﻿  main.cpp
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Entity.h(11,22): warning C4091: “extern ”: 没有声明变量时忽略“RedPlane”的左侧
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Entity.h(12,25): warning C4091: “extern ”: 没有声明变量时忽略“YellowPlane”的左侧
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Entity.h(13,23): warning C4091: “extern ”: 没有声明变量时忽略“BluePlane”的左侧
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Entity.h(14,24): warning C4091: “extern ”: 没有声明变量时忽略“GreenPlane”的左侧
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Entity.h(64,83): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=unsigned int
+          ]
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Entity.h(64,52): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=unsigned int
+          ]
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Entity.h(75,83): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=unsigned int
+          ]
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Entity.h(75,52): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=unsigned int
+          ]
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Entity.h(87,83): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=unsigned int
+          ]
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Entity.h(87,52): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=unsigned int
+          ]
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Entity.h(99,83): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=unsigned int
+          ]
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Entity.h(99,52): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=unsigned int
+          ]
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\ChessBoard.h(13,20): warning C4091: “extern ”: 没有声明变量时忽略“Entity”的左侧
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\ChessBoard.h(14,24): warning C4091: “extern ”: 没有声明变量时忽略“ChessBoard”的左侧
   友尽飞行棋.vcxproj -> C:\Users\hp\source\repos\友尽飞行棋\x64\Debug\友尽飞行棋.exe
