@@ -8,7 +8,7 @@ void GameManager::GameLogic(sf::Event event)
 	switch (turn)
 	{
 	case GameManager::PLANE:
-		planepool->Input(event);
+		planepool->Input(event,dice->Number);
 		break;
 	case GameManager::BRIGE_TODICE:
 		if(dice->Number!=6)
@@ -16,7 +16,7 @@ void GameManager::GameLogic(sf::Event event)
 		turn = DICE;
 		break;
 	case GameManager::BRIGE_TOPLANE:
-		if (this->planepool->currentpool->JudgeAvailable())
+		if (this->planepool->currentpool->JudgeAvailable(dice->Number))
 			turn = PLANE;
 		else
 			turn = BRIGE_TODICE;

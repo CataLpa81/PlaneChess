@@ -14,6 +14,10 @@ void Entity::Update()
 	this->sprite.setPosition(x, y);	
 }
 
+void Entity::Rander()
+{
+	window.draw(this->sprite);
+}
 
 int Dice::createNumber()
 {
@@ -45,7 +49,6 @@ void Dice::input(sf::Event& event)
 		//给观察这发送消息，轮到飞机的操作时间
 		this->notify(MVCEvent::PLANETIME);
 	}
-	
 }
 
 void Dice::Rander()

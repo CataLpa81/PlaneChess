@@ -20,7 +20,7 @@ class Plane :public Entity,public Subject
 {
 public:
 	virtual void Update();
-	virtual void Input(sf::Event& event);
+	virtual void Input(sf::Event& event, int diceNumber);
 	void move(int step);
 	enum {
 		HOME,
@@ -40,8 +40,8 @@ public:
 	void AddObserver(Observer* observer);
 	void Update();
 	void Rander();
-	void Input(sf::Event& event);
-	bool JudgeAvailable();
+	void Input(sf::Event& event, int diceNumber);
+	bool JudgeAvailable(int diceNumber);
 	Plane* plane[4];
 	friend PlanePool;
 };
@@ -91,7 +91,7 @@ public:
 	void SwitchToNextTurn();
 	void Update();
 	void Rander();
-	void Input(sf::Event& event);
+	void Input(sf::Event& event,int diceNumber);
 	enum {
 		RED,
 		YELLOW,

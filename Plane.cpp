@@ -3,10 +3,7 @@
 #include<fstream>
 
 
-void Entity::Rander()
-{
-	window.draw(this->sprite);
-}
+
 
 void Plane::Update()
 {
@@ -55,22 +52,20 @@ void Plane::move(int step)
 	}
 }
 
-void Plane::Input(sf::Event& event)
+void Plane::Input(sf::Event& event, int diceNumber)
 {
 	//当鼠标左键在飞机上释放时
 	if (event.type == Event::MouseButtonReleased 
 		&& event.mouseButton.button == sf::Mouse::Left
 		&& this->hitbox.contains((sf::Vector2f)sf::Mouse::getPosition(window)))
 	{
-		Dice* dice = Dice::instance();
-		this->move(dice->Number);
+		this->move(diceNumber);
 	}
 }
 
-bool PlanePoolUnit::JudgeAvailable()
+bool PlanePoolUnit::JudgeAvailable(int diceNumber)
 {
-	Dice* dice = Dice::instance();
-	if (dice->Number == 6)
+	if (diceNumber == 6)
 	{
 		return true;
 	}
@@ -109,11 +104,11 @@ void PlanePoolUnit::Rander()
 	}
 }
 
-void PlanePoolUnit::Input(sf::Event& event)
+void PlanePoolUnit::Input(sf::Event& event, int diceNumber)
 {
 	for (int i = 0;i < 4;i++)
 	{
-		plane[i]->Input(event);
+		plane[i]->Input(event,diceNumber);
 	}
 }
 
@@ -225,9 +220,9 @@ PlanePool::PlanePool()
 	
 }
 
-void PlanePool::Input(sf::Event& event)
+void PlanePool::Input(sf::Event& event,int diceNumber)
 {
-	currentpool->Input(event);
+	currentpool->Input(event,diceNumber);
 }
 
 void PlanePool::SwitchToNextTurn()
