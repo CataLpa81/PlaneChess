@@ -3,6 +3,7 @@
 #include<fstream>
 #include<time.h>
 #include"Plane.h"
+#include"GameManager.h"
 
 
 
@@ -19,7 +20,7 @@ int Dice::createNumber()
 	srand((int)time(NULL));
 	int number = rand()%6+1;
 	std::cout << "number = " << number << std::endl;
-	this->state = UNROLLABLE;
+	Number = number;
 	return number;
 }
 
@@ -36,19 +37,13 @@ Dice::Dice()
 
 void Dice::input(sf::Event& event)
 {
-	if (this->state == ROLLABLE)
+	if (event.type == Event::MouseButtonReleased
+		&& event.mouseButton.button == sf::Mouse::Left
+		&& this->hitbox.contains((sf::Vector2f)sf::Mouse::getPosition(window)))
 	{
-		if (event.type == sf::Event::MouseButtonReleased &&
-			event.mouseButton.button == sf::Mouse::Left)
-		{
-			if (this->hitbox.contains((sf::Vector2f)sf::Mouse::getPosition(window)) &&
-				state == ROLLABLE)
-			{
-				std::cout << "dice clicked" << std::endl;
-				Number = createNumber();
-				this->state = UNROLLABLE;
-			}
-		}
+		createNumber();
+		//给观察这发送消息，轮到飞机的操作时间
+		this->notify(MVCEvent::PLANETIME);
 	}
 	
 }

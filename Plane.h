@@ -4,6 +4,7 @@
 #include<SFML/Graphics.hpp>
 #include<SFML/Window.hpp>
 #include"ChessBoard.h"
+#include"GameManager.h"
 
 using namespace sf;
 
@@ -15,7 +16,7 @@ extern class PlanePool;
 
 extern sf::RenderWindow window;
 
-class Plane :public Entity
+class Plane :public Entity,public Subject
 {
 public:
 	virtual void Update();
@@ -36,11 +37,11 @@ public:
 class PlanePoolUnit
 {
 public:
-
+	void AddObserver(Observer* observer);
 	void Update();
 	void Rander();
 	void Input(sf::Event& event);
-	bool available=false;
+	bool JudgeAvailable();
 	Plane* plane[4];
 	friend PlanePool;
 };
@@ -86,6 +87,7 @@ public:
 		static PlanePool* instance = new PlanePool();
 		return instance;
 	}
+	void AddObserver(Observer* observer);
 	void SwitchToNextTurn();
 	void Update();
 	void Rander();
@@ -96,6 +98,7 @@ public:
 		BLUE,
 		GREEN,
 	}TURN = RED;
+	PlanePoolUnit* currentpool;
 	RedPlanePool redplanepool;
 	BluePlanePool blueplanepool;
 	YellowPlanePool yellowplanepool;

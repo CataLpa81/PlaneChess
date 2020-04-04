@@ -6,6 +6,7 @@
 #include"Entity.h"
 #include<fstream>
 #include"Plane.h"
+#include"GameManager.h"
 #define WIDTH 1200
 #define HEIGHT 800
 
@@ -17,10 +18,16 @@ Texture tbk;
 Sprite spbk;
 
 ChessBoard* chessboard = ChessBoard::instance();
-PlanePool* planepool = PlanePool::instance();
-Dice* dice = Dice::instance();
+
+GameManager* gm;
+
 void Initial()
 {
+	PlanePool* planepool = PlanePool::instance();
+	Dice* dice = Dice::instance();
+	gm = GameManager::instance(dice, planepool);
+	gm->dice->addObserver(gm);
+	gm->planepool->AddObserver(gm);
 	window.setFramerateLimit(10);
 	tbk.loadFromFile("./data/background/sky.jpg");
 	spbk.setTexture(tbk);
@@ -36,9 +43,10 @@ void Input()
 		if (event.type == sf::Event::Closed) { // ¼ì²â¹Ø±Õ
 			window.close();
 		}
+
 		
-		dice->input(event);
-		planepool->Input(event);
+		gm->GameLogic(event);
+		
 	}
 
 
@@ -46,15 +54,15 @@ void Input()
 
 void Update()
 {
-	planepool->Update();
+	gm->planepool->Update();
 }
 
 void Rander()
 {
 	window.draw(spbk);
 	window.draw(chessboard->sprite);
-	planepool->Rander();
-	dice->Rander();
+	gm->planepool->Rander();
+	gm->dice->Rander();
 	window.display();
 }
 

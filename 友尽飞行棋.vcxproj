@@ -146,12 +146,16 @@
   <ItemGroup>
     <ClCompile Include="ChessBoard.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MVC.cpp" />
     <ClCompile Include="Plane.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChessBoard.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="MVC.h" />
     <ClInclude Include="Plane.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

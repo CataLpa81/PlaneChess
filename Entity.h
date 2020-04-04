@@ -1,12 +1,11 @@
 #pragma once
 #ifndef ENTITY_H
 #define ENTITY_H
-
-
 #include<SFML/Audio.hpp>
 #include<SFML/Graphics.hpp>
 #include<SFML/Window.hpp>
 #include"ChessBoard.h"
+#include"MVC.h"
 
 
 
@@ -15,6 +14,7 @@ using namespace sf;
 extern sf::RenderWindow window;
 
 
+extern class Dice;
 
 class Entity
 {
@@ -28,7 +28,7 @@ public:
 	sf::FloatRect hitbox;
 };
 
-class Dice : public Entity
+class Dice : public Entity,public Subject
 {
 public:
 	//µ¥ÀýÄ£Ê½
@@ -37,10 +37,6 @@ public:
 		static Dice* instance = new Dice();
 		return instance;
 	}
-	enum {
-		ROLLABLE,
-		UNROLLABLE
-	}state=ROLLABLE;
 	virtual void Update();
 	virtual void Rander();
 	int createNumber();
