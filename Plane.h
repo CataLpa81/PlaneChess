@@ -26,11 +26,16 @@ public:
 		HOME,
 		READY,
 		ONBOARD,
+		ONFINAL,
 		FINAL
 	}state = HOME;
+	//已经走过的格子数
+	int stepcount=0;
+	//家的位置
 	int home_pos_x, home_pos_y;
+	//准备起飞的位置
 	int ready_pos_x, ready_pos_y;
-	
+	//飞机的各种位置
 	int pos_start, pos_end, pos_final_start, pos_final_end;
 };
 
@@ -42,6 +47,7 @@ public:
 	void Rander();
 	void Input(sf::Event& event, int diceNumber);
 	bool JudgeAvailable(int diceNumber);
+	bool fine=false;
 	Plane* plane[4];
 	friend PlanePool;
 };

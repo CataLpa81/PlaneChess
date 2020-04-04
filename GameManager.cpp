@@ -13,6 +13,12 @@ void GameManager::GameLogic(sf::Event event)
 	case GameManager::BRIGE_TODICE:
 		if(dice->Number!=6)
 		planepool->SwitchToNextTurn();
+		if(planepool->currentpool->fine==true)
+			planepool->SwitchToNextTurn();
+		if (planepool->currentpool->fine == true)
+			planepool->SwitchToNextTurn();
+		if (planepool->currentpool->fine == true)
+			planepool->SwitchToNextTurn();
 		turn = DICE;
 		break;
 	case GameManager::BRIGE_TOPLANE:

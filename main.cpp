@@ -43,10 +43,7 @@ void Input()
 		if (event.type == sf::Event::Closed) { // ¼ì²â¹Ø±Õ
 			window.close();
 		}
-
-		
 		gm->GameLogic(event);
-		
 	}
 
 

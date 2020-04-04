@@ -7,7 +7,7 @@
 
 void Plane::Update()
 {
-	if (state == ONBOARD)
+	if (state == ONBOARD||state==ONFINAL)
 	{
 		this->x = chessboard->blocks[pos - 1].x + chessboard->sprite.getPosition().x;
 		this->y = chessboard->blocks[pos - 1].y + chessboard->sprite.getPosition().y;
@@ -33,23 +33,87 @@ void Plane::move(int step)
 {
 	if (state == ONBOARD)
 	{
+		this->stepcount += step;
 		this->pos += step;
+		if (this->pos > 52)
+		{
+			this->pos -= 52;
+		}
+		//如果踩在第一个多次飞行的格子上
+		if (this->stepcount==14)
+		{
+			this->stepcount += 16;
+			this->pos = this->pos_start + 29;
+		}
+		//如果踩在第二个多次飞行的格子上
+		else if (this->stepcount == 18)
+		{
+			this->stepcount += 16;
+			this->pos = this->pos_start+33;
+		}
+		//如果踩在同颜色的格子上
+		else if ((stepcount + 2) % 4 == 0 && stepcount < 50)
+		{
+
+			this->stepcount += 4;
+			this->pos += 4;
+			if (this->pos > 52)
+			{
+				this->pos -= 52;
+			}
+		}
+		if (this->pos > 52)
+		{
+			this->pos -= 52;
+		}
+		
+		if (this->stepcount > 50)
+		{
+			this->state = ONFINAL;
+			this->pos = stepcount - 50 + pos_final_start-1;
+			if (this->pos == this->pos_final_end)
+				this->state = FINAL;
+		}
 		//给观察者发送消息，飞机操作完毕，开始骰子操作
 		this->notify(MVCEvent::DICETIME);
 	}
 	else if (state == HOME&&step == 6)
 	{
+		stepcount = 0;
 		state = READY;
 		//给观察者发送消息，飞机操作完毕，开始骰子操作
 		this->notify(MVCEvent::DICETIME);
 	}
 	else if (state == READY)
 	{
+		this->stepcount = step;
 		state = ONBOARD;
 		this->pos = step+this->pos_start-1;
+		if (step == 2 || step == 6)
+		{
+			this->stepcount += 4;
+			this->pos += 4;
+		}
 		//给观察者发送消息，飞机操作完毕，开始骰子操作
 		this->notify(MVCEvent::DICETIME);
 	}
+	else if (state == ONFINAL)
+	{
+		stepcount += step;
+		pos += step;
+		if (this->pos == this->pos_final_end)
+		{
+			this->state = FINAL;
+		}
+			
+		else if (this->pos > this->pos_final_end)
+		{
+			pos = pos_final_end - (pos - pos_final_end);
+		}
+		//给观察者发送消息，飞机操作完毕，开始骰子操作
+		this->notify(MVCEvent::DICETIME);
+	}
+
 }
 
 void Plane::Input(sf::Event& event, int diceNumber)
@@ -73,7 +137,7 @@ bool PlanePoolUnit::JudgeAvailable(int diceNumber)
 	{
 		for (int i = 0;i < 4;i++)
 		{
-			if (plane[i]->state != Plane::HOME)
+			if (plane[i]->state != Plane::HOME&&plane[i]->state!=Plane::FINAL)
 				return true;
 		}
 	}
@@ -93,7 +157,17 @@ void PlanePoolUnit::Update()
 	for (int i = 0;i < 4;i++)
 	{
 		plane[i]->Update();
+		int fineCount = 0;
+		if (plane[i]->state == Plane::FINAL)
+		{	
+			fineCount += 1;
+			if (fineCount == 4)
+			{
+				this->fine = true;
+			}
+		}
 	}
+
 }
 
 void PlanePoolUnit::Rander()
