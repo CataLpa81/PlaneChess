@@ -1,18 +1,31 @@
 #pragma once
-
 #include<SFML/Audio.hpp>
 #include<SFML/Graphics.hpp>
 #include<SFML/Window.hpp>
 #include"ChessBoard.h"
 #include"GameManager.h"
+#include"Entity.h"
+
+#define PlaneInit(ps,pe,pfs,pfe,lff)\
+this->PPU=PPU_;\
+pos_start = ps;\
+pos_end = pe;\
+pos_final_start = pfs;\
+pos_final_end = pfe;\
+this->texture.loadFromFile(lff);\
+this->sprite.setTexture(this->texture);\
+this->sprite.setOrigin(this->texture.getSize().x / 2, this->texture.getSize().y / 2)
+
 
 using namespace sf;
 
+extern class PlanePoolUnit;
 extern class RedPlane;
 extern class YellowPlane;
 extern class BluePlane;
 extern class GreenPlane;
 extern class PlanePool;
+extern class Entity;
 
 extern sf::RenderWindow window;
 
@@ -21,6 +34,7 @@ class Plane :public Entity,public Subject
 public:
 	virtual void Update();
 	virtual void Input(sf::Event& event, int diceNumber);
+	virtual void Init();
 	void move(int step);
 	enum {
 		HOME,
@@ -29,6 +43,8 @@ public:
 		ONFINAL,
 		FINAL
 	}state = HOME;
+	PlanePoolUnit* PPU;
+	int lastpos = 0;
 	//已经走过的格子数
 	int stepcount=0;
 	//家的位置
@@ -38,7 +54,27 @@ public:
 	//飞机的各种位置
 	int pos_start, pos_end, pos_final_start, pos_final_end;
 };
+class RedPlane : public Plane
+{
+public:
+	RedPlane(PlanePoolUnit* PPU_) { PlaneInit(4, 1, 53, 58, "./data/Entity/red_player.png"); }
+};
+class YellowPlane : public Plane
+{
+public:
+	YellowPlane(PlanePoolUnit* PPU_) { PlaneInit(17, 14, 49, 64, "./data/Entity/yellow_player.png"); }
+};
 
+class BluePlane : public Plane
+{
+public:
+	BluePlane(PlanePoolUnit* PPU_) { PlaneInit(30, 27, 65, 70, "./data/Entity/blue_player.png"); }
+};
+class GreenPlane : public Plane
+{
+public:
+	GreenPlane(PlanePoolUnit* PPU_) { PlaneInit(43, 40, 71, 76, "./data/Entity/green_player.png"); }
+};
 class PlanePoolUnit
 {
 public:
@@ -49,7 +85,6 @@ public:
 	bool JudgeAvailable(int diceNumber);
 	bool fine=false;
 	Plane* plane[4];
-	friend PlanePool;
 };
 
 class RedPlanePool:public PlanePoolUnit
@@ -57,31 +92,28 @@ class RedPlanePool:public PlanePoolUnit
 public:
 	friend PlanePool;
 private:
-	RedPlanePool();
+	RedPlanePool(){ for (int i = 0;i < 4;i++)this->plane[i] = new RedPlane(this); }
 };
-
 class BluePlanePool :public PlanePoolUnit
 {
 public:
 	friend PlanePool;
 private:
-	BluePlanePool();
+	BluePlanePool() { for (int i = 0;i < 4;i++)this->plane[i] = new BluePlane(this); }
 };
-
 class YellowPlanePool :public PlanePoolUnit
 {
 public:
 	friend PlanePool;
 private:
-	YellowPlanePool();
+	YellowPlanePool() { for (int i = 0;i < 4;i++)this->plane[i] = new YellowPlane(this); }
 };
-
 class GreenPlanePool :public PlanePoolUnit
 {
 public:
 	friend PlanePool;
 private:
-	GreenPlanePool();
+	GreenPlanePool() { for (int i = 0;i < 4;i++)this->plane[i] = new GreenPlane(this); }
 };
 
 class PlanePool
@@ -112,62 +144,4 @@ public:
 private:
 	PlanePool();
 
-};
-
-class RedPlane : public Plane
-{
-public:
-	RedPlane() {
-		pos_start = 4;
-		pos_end = 1;
-		pos_final_start = 53;
-		pos_final_end = 58;
-		this->texture.loadFromFile("./data/Entity/red_player.png");
-		this->sprite.setTexture(this->texture);
-		this->sprite.setOrigin(this->texture.getSize().x / 2, this->texture.getSize().y / 2);
-	}
-};
-
-class YellowPlane : public Plane
-{
-public:
-	YellowPlane() {
-		pos_start = 17;
-		pos_end = 14;
-		pos_final_start = 59;
-		pos_final_end = 64;
-		this->texture.loadFromFile("./data/Entity/yellow_player.png");
-		this->sprite.setTexture(this->texture);
-		this->sprite.setOrigin(this->texture.getSize().x / 2, this->texture.getSize().y / 2);
-	}
-};
-
-
-class BluePlane : public Plane
-{
-public:
-	BluePlane() {
-		pos_start = 30;
-		pos_end = 27;
-		pos_final_start = 65;
-		pos_final_end = 70;
-		this->texture.loadFromFile("./data/Entity/blue_player.png");
-		this->sprite.setTexture(this->texture);
-		this->sprite.setOrigin(this->texture.getSize().x / 2, this->texture.getSize().y / 2);
-	}
-};
-
-
-class GreenPlane : public Plane
-{
-public:
-	GreenPlane() {
-		pos_start = 43;
-		pos_end = 40;
-		pos_final_start = 71;
-		pos_final_end = 76;
-		this->texture.loadFromFile("./data/Entity/green_player.png");
-		this->sprite.setTexture(this->texture);
-		this->sprite.setOrigin(this->texture.getSize().x / 2, this->texture.getSize().y / 2);
-	}
 };

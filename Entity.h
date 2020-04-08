@@ -1,19 +1,14 @@
 #pragma once
-#ifndef ENTITY_H
-#define ENTITY_H
 #include<SFML/Audio.hpp>
 #include<SFML/Graphics.hpp>
 #include<SFML/Window.hpp>
-#include"ChessBoard.h"
 #include"MVC.h"
-
-
 
 using namespace sf;
 
 extern sf::RenderWindow window;
 
-
+extern class Subject;
 extern class Dice;
 
 class Entity
@@ -21,6 +16,7 @@ class Entity
 public:
 	virtual void Update();
 	virtual void Rander();
+	virtual void Init();
 	int x, y;
 	int pos;
 	Texture texture;
@@ -49,4 +45,3 @@ private:
 
 
 
-#endif // !ENTITY_H

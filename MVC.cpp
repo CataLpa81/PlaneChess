@@ -11,10 +11,10 @@ void Subject::removeObserver(Observer* observer)
 	observers.erase(observer);
 }
 
-void Subject::notify(MVCEvent event)
+void Subject::notify(Entity* entity_,MVCEvent event)
 {
 	for (Observer* ob : observers)
 	{
-		ob->onNotify(event);
+		ob->onNotify(entity_,event);
 	}
 }

@@ -9,8 +9,8 @@
 
 void Entity::Update()
 {
-	this->x = chessboard->blocks[pos - 1].x;
-	this->y = chessboard->blocks[pos - 1].y;
+	this->x = ChessBoard::instance()->blocks[pos - 1].x;
+	this->y = ChessBoard::instance()->blocks[pos - 1].y;
 	this->sprite.setPosition(x, y);	
 }
 
@@ -18,6 +18,9 @@ void Entity::Rander()
 {
 	window.draw(this->sprite);
 }
+
+void Entity::Init()
+{}
 
 int Dice::createNumber()
 {
@@ -47,7 +50,7 @@ void Dice::input(sf::Event& event)
 	{
 		createNumber();
 		//给观察这发送消息，轮到飞机的操作时间
-		this->notify(MVCEvent::PLANETIME);
+		this->notify(this,MVCEvent::PLANETIME);
 	}
 }
 

@@ -3,7 +3,7 @@
 
 
 
-void GameManager::GameLogic(sf::Event event)
+void GameManager::GameInputLogic(sf::Event event)
 {
 	switch (turn)
 	{
@@ -36,7 +36,13 @@ void GameManager::GameLogic(sf::Event event)
 
 }
 
-void GameManager::onNotify(MVCEvent event)
+void GameManager::GameUpdateLogic()
+{
+	planepool->Update();
+	
+}
+
+void GameManager::onNotify(Entity* entity_,MVCEvent event)
 {
 	switch (event)
 	{
@@ -45,6 +51,7 @@ void GameManager::onNotify(MVCEvent event)
 		break;
 	case PLANETIME:
 		turn = BRIGE_TOPLANE;
+
 		break;
 	default:
 		break;

@@ -4,7 +4,6 @@
 #include<SFML/Window.hpp>
 #include"ChessBoard.h"
 #include"Entity.h"
-#include<fstream>
 #include"Plane.h"
 #include"GameManager.h"
 #define WIDTH 1200
@@ -17,22 +16,21 @@ sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "CataLpa");
 Texture tbk;
 Sprite spbk;
 
-ChessBoard* chessboard = ChessBoard::instance();
+
 
 GameManager* gm;
 
 void Initial()
 {
-	PlanePool* planepool = PlanePool::instance();
-	Dice* dice = Dice::instance();
-	gm = GameManager::instance(dice, planepool);
+	gm = GameManager::instance(Dice::instance(), PlanePool::instance(), ChessBoard::instance());
 	gm->dice->addObserver(gm);
 	gm->planepool->AddObserver(gm);
+	gm->planepool->AddObserver(gm->chessboard);
 	window.setFramerateLimit(10);
 	tbk.loadFromFile("./data/background/sky.jpg");
 	spbk.setTexture(tbk);
-	chessboard->texture.loadFromFile("./data/Background/chessboard.png");
-	chessboard->sprite.setTexture(chessboard->texture);
+	ChessBoard::instance()->texture.loadFromFile("./data/Background/chessboard.png");
+	ChessBoard::instance()->sprite.setTexture(ChessBoard::instance()->texture);
 }
 
 void Input()
@@ -43,7 +41,7 @@ void Input()
 		if (event.type == sf::Event::Closed) { // ¼ì²â¹Ø±Õ
 			window.close();
 		}
-		gm->GameLogic(event);
+		gm->GameInputLogic(event);
 	}
 
 
@@ -51,13 +49,13 @@ void Input()
 
 void Update()
 {
-	gm->planepool->Update();
+	gm->GameUpdateLogic();
 }
 
 void Rander()
 {
 	window.draw(spbk);
-	window.draw(chessboard->sprite);
+	window.draw(ChessBoard::instance()->sprite);
 	gm->planepool->Rander();
 	gm->dice->Rander();
 	window.display();

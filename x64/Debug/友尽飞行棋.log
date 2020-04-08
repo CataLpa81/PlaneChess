@@ -1,144 +1,39 @@
-﻿  Plane.cpp
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Entity.h(17,18): warning C4091: “extern ”: 没有声明变量时忽略“Dice”的左侧
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\ChessBoard.h(13,20): warning C4091: “extern ”: 没有声明变量时忽略“Entity”的左侧
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\ChessBoard.h(14,24): warning C4091: “extern ”: 没有声明变量时忽略“ChessBoard”的左侧
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\GameManager.h(8,23): warning C4091: “extern ”: 没有声明变量时忽略“PlanePool”的左侧
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\GameManager.h(9,18): warning C4091: “extern ”: 没有声明变量时忽略“Dice”的左侧
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.h(11,22): warning C4091: “extern ”: 没有声明变量时忽略“RedPlane”的左侧
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.h(12,25): warning C4091: “extern ”: 没有声明变量时忽略“YellowPlane”的左侧
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.h(13,23): warning C4091: “extern ”: 没有声明变量时忽略“BluePlane”的左侧
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.h(14,24): warning C4091: “extern ”: 没有声明变量时忽略“GreenPlane”的左侧
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.h(15,23): warning C4091: “extern ”: 没有声明变量时忽略“PlanePool”的左侧
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.h(126,83): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+﻿  ChessBoard.cpp
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\MVC.h(5,20): warning C4091: “extern ”: 没有声明变量时忽略“Entity”的左侧
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Entity.h(11,21): warning C4091: “extern ”: 没有声明变量时忽略“Subject”的左侧
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Entity.h(12,18): warning C4091: “extern ”: 没有声明变量时忽略“Dice”的左侧
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\GameManager.h(8,24): warning C4091: “extern ”: 没有声明变量时忽略“ChessBoard”的左侧
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\GameManager.h(9,23): warning C4091: “extern ”: 没有声明变量时忽略“PlanePool”的左侧
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\GameManager.h(10,18): warning C4091: “extern ”: 没有声明变量时忽略“Dice”的左侧
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.h(22,27): warning C4091: “extern ”: 没有声明变量时忽略“PlanePoolUnit”的左侧
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.h(23,22): warning C4091: “extern ”: 没有声明变量时忽略“RedPlane”的左侧
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.h(24,25): warning C4091: “extern ”: 没有声明变量时忽略“YellowPlane”的左侧
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.h(25,23): warning C4091: “extern ”: 没有声明变量时忽略“BluePlane”的左侧
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.h(26,24): warning C4091: “extern ”: 没有声明变量时忽略“GreenPlane”的左侧
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.h(27,23): warning C4091: “extern ”: 没有声明变量时忽略“PlanePool”的左侧
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.h(28,20): warning C4091: “extern ”: 没有声明变量时忽略“Entity”的左侧
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.h(60,34): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
           with
           [
               T=unsigned int
           ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.h(126,52): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.h(65,37): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
           with
           [
               T=unsigned int
           ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.h(140,83): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.h(71,35): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
           with
           [
               T=unsigned int
           ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.h(140,52): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.h(76,36): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
           with
           [
               T=unsigned int
           ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.h(155,83): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
-          with
-          [
-              T=unsigned int
-          ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.h(155,52): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
-          with
-          [
-              T=unsigned int
-          ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.h(170,83): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
-          with
-          [
-              T=unsigned int
-          ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.h(170,52): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
-          with
-          [
-              T=unsigned int
-          ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.cpp(12,43): warning C4244: “=”: 从“T”转换到“int”，可能丢失数据
-          with
-          [
-              T=float
-          ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.cpp(13,43): warning C4244: “=”: 从“T”转换到“int”，可能丢失数据
-          with
-          [
-              T=float
-          ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.cpp(26,30): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.cpp(26,27): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.cpp(218,43): warning C4244: “=”: 从“T”转换到“int”，可能丢失数据
-          with
-          [
-              T=float
-          ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.cpp(220,43): warning C4244: “=”: 从“T”转换到“int”，可能丢失数据
-          with
-          [
-              T=float
-          ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.cpp(226,41): warning C4244: “=”: 从“T”转换到“int”，可能丢失数据
-          with
-          [
-              T=float
-          ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.cpp(228,41): warning C4244: “=”: 从“T”转换到“int”，可能丢失数据
-          with
-          [
-              T=float
-          ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.cpp(234,45): warning C4244: “=”: 从“T”转换到“int”，可能丢失数据
-          with
-          [
-              T=float
-          ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.cpp(236,45): warning C4244: “=”: 从“T”转换到“int”，可能丢失数据
-          with
-          [
-              T=float
-          ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.cpp(242,43): warning C4244: “=”: 从“T”转换到“int”，可能丢失数据
-          with
-          [
-              T=float
-          ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.cpp(244,43): warning C4244: “=”: 从“T”转换到“int”，可能丢失数据
-          with
-          [
-              T=float
-          ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.cpp(253,44): warning C4244: “=”: 从“T”转换到“int”，可能丢失数据
-          with
-          [
-              T=float
-          ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.cpp(256,44): warning C4244: “=”: 从“T”转换到“int”，可能丢失数据
-          with
-          [
-              T=float
-          ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.cpp(259,42): warning C4244: “=”: 从“T”转换到“int”，可能丢失数据
-          with
-          [
-              T=float
-          ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.cpp(262,42): warning C4244: “=”: 从“T”转换到“int”，可能丢失数据
-          with
-          [
-              T=float
-          ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.cpp(265,45): warning C4244: “=”: 从“T”转换到“int”，可能丢失数据
-          with
-          [
-              T=float
-          ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.cpp(268,45): warning C4244: “=”: 从“T”转换到“int”，可能丢失数据
-          with
-          [
-              T=float
-          ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.cpp(271,43): warning C4244: “=”: 从“T”转换到“int”，可能丢失数据
-          with
-          [
-              T=float
-          ]
-C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\Plane.cpp(274,43): warning C4244: “=”: 从“T”转换到“int”，可能丢失数据
-          with
-          [
-              T=float
-          ]
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\ChessBoard.h(14,20): warning C4091: “extern ”: 没有声明变量时忽略“Entity”的左侧
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\ChessBoard.h(15,24): warning C4091: “extern ”: 没有声明变量时忽略“ChessBoard”的左侧
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\ChessBoard.h(16,19): warning C4091: “extern ”: 没有声明变量时忽略“Plane”的左侧
+C:\Users\hp\source\repos\友尽飞行棋\友尽飞行棋\ChessBoard.h(17,21): warning C4091: “extern ”: 没有声明变量时忽略“MVCEvent”的左侧
   友尽飞行棋.vcxproj -> C:\Users\hp\source\repos\友尽飞行棋\x64\Debug\友尽飞行棋.exe
