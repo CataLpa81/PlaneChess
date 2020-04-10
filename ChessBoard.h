@@ -9,7 +9,7 @@
 #include"MVC.h"
 #include"Plane.h"
 
-#define BLOCKNUM 96
+#define BLOCKNUM 76
 using namespace sf;
 
 extern class Entity;
@@ -38,11 +38,13 @@ public:
 		static ChessBoard* instance = new ChessBoard();
 		return instance;
 	}
-	virtual void onNotify(Entity* entity_,MVCEvent event);
+	
 	Texture texture;
 	Sprite sprite;
-	block blocks[96];
+	block blocks[BLOCKNUM];
+	virtual void onNotify(Entity* entity_, MVCEvent event);
 	void getdata();
+	void Update();
 private:
 	ChessBoard();
 };

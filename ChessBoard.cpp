@@ -23,22 +23,25 @@ void ChessBoard::getdata()
 		infile >> a;
 		blocks[i].y = a + sprite.getPosition().y;
 	}
-	for (int i = 76;i < 76 + 16;i++)
-	{
-		infile >> a;
-		blocks[i].x = a + sprite.getPosition().x;
-		infile >> a;
-		blocks[i].y = a + sprite.getPosition().y;
-	}
 
-	for (int i = 92;i < 96;i++)
+}
+void ChessBoard::Update()
+{
+	for (int i = 0;i < BLOCKNUM;i++)
 	{
-		infile >> a;
-		blocks[i].x = a + sprite.getPosition().x;
-		infile >> a;
-		blocks[i].y = a + sprite.getPosition().y;
+		if (this->blocks[i].entityvector.size() != 0)
+		{
+			int offset = 0;
+			for (std::list<Entity*>::iterator iter = this->blocks[i].entityvector.begin()
+				;iter != this->blocks[i].entityvector.end();++iter)
+			{
+				dynamic_cast<Entity*>(*iter)->sprite.setPosition(offset * 3, -offset * 3);
+				offset++;
+			}
+		}
 	}
 }
+
 
 void ChessBoard::onNotify(Entity* entity_,MVCEvent event)
 {
@@ -52,8 +55,6 @@ void ChessBoard::onNotify(Entity* entity_,MVCEvent event)
 		this->blocks[dynamic_cast<Plane*>(entity_)->pos - 1].judgehit(dynamic_cast<Plane*>(entity_));
 		
 	}
-
-	
 }
 void block::judgehit(Plane* plane_)
 {

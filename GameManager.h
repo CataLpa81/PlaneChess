@@ -36,4 +36,6 @@ private:
 		dice = dice_;
 		planepool = planepool_;
 	}
+
+
 };

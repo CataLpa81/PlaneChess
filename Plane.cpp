@@ -17,6 +17,7 @@ void Plane::Update()
 		if (lastpos != 0)
 		{
 			moveUpdate(cb->blocks[lastpos - 1], cb->blocks[pos - 1]);
+
 		}
 		else
 		{
@@ -32,12 +33,7 @@ void Plane::Update()
 		this->y = home_pos_y;
 		setrotation();
 	}
-	else if (state == READY)
-	{
-		this->x = ready_pos_x;
-		this->y = ready_pos_y;
-		setrotation();
-	}
+
 	
 	this->sprite.setPosition(x, y);
 	hitbox = this->sprite.getGlobalBounds();
@@ -95,6 +91,8 @@ void Plane::moveUpdate(block b1,block b2)
 				this->state = FINAL;
 				this->sprite.setTexture(finaltexture);
 			}
+			if (PPU->ready_num != 0)
+				PPU->ready_num--;
 			
 			setrotation();
 			
@@ -179,18 +177,27 @@ void Plane::move(int step)
 	{
 		stepcount = 0;
 		state = READY;
+		this->x = ready_pos_x;
+		this->y = ready_pos_y;
+		
+		setrotation();
 		//给观察者发送消息，飞机操作完毕，开始骰子操作
 		this->notify(this,MVCEvent::DICETIME);
 	}
 	else if (state == READY)
 	{
-		this->stepcount = step;
-		state = ONBOARD;
-		this->pos = step+this->pos_start-1;
-		//给观察者发送消息，飞机操作完毕，开始骰子操作
-		this->notify(this,MVCEvent::DICETIME);
-		//给观察者发送消息，飞机操作完毕，告知棋盘
-		doFly = true;
+		if (PPU->ready_num == 0)
+		{
+			this->stepcount = step;
+			state = ONBOARD;
+			PPU->ready_num++;
+			this->pos = step + this->pos_start - 1;
+			//给观察者发送消息，飞机操作完毕，开始骰子操作
+			this->notify(this, MVCEvent::DICETIME);
+			//给观察者发送消息，飞机操作完毕，告知棋盘
+			doFly = true;
+		}
+		
 	}
 	else if (state == ONFINAL)
 	{
@@ -273,6 +280,14 @@ void PlanePoolUnit::Update()
 
 }
 
+void PlanePoolUnit::Render()
+{
+	for (int i = 0;i < 4;i++)
+	{
+		plane[i]->Rander();
+	}
+}
+
 void PlanePoolUnit::Input(sf::Event& event, int diceNumber)
 {
 	for (int i = 0;i < 4;i++)
@@ -280,6 +295,14 @@ void PlanePoolUnit::Input(sf::Event& event, int diceNumber)
 		plane[i]->Input(event,diceNumber);
 	}
 }
+
+void PlanePool::Render()
+{
+	redplanepool.Render();
+	blueplanepool.Render();
+	yellowplanepool.Render();
+	greenplanepool.Render();
+};
 
 void PlanePool::Update()
 {

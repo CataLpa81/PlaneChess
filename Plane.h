@@ -67,6 +67,8 @@ public:
 	bool doFly;
 
 	float final_ready_rotation;
+
+	
 };
 class RedPlane : public Plane
 {
@@ -100,7 +102,7 @@ class GreenPlane : public Plane
 public:
 	GreenPlane(PlanePoolUnit* PPU_) { PlaneInit(43, 40, 71, 76, "./data/Entity/green_player.png");
 	this->finaltexture.loadFromFile("./data/Entity/green_player_final.png");
-	final_ready_rotation = 90;
+	final_ready_rotation=90;
 	}
 };
 class PlanePoolUnit
@@ -108,10 +110,12 @@ class PlanePoolUnit
 public:
 	void AddObserver(Observer* observer);
 	void Update();
+	void Render();
 	void Input(sf::Event& event, int diceNumber);
 	bool JudgeAvailable(int diceNumber);
 	bool fine=false;
 	Plane* plane[4];
+	int ready_num = 0;
 };
 
 class RedPlanePool:public PlanePoolUnit
@@ -155,6 +159,7 @@ public:
 	void AddObserver(Observer* observer);
 	void SwitchToNextTurn();
 	void Update();
+	void Render();
 	void Input(sf::Event& event,int diceNumber);
 	enum {
 		RED,
