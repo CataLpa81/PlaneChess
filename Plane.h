@@ -35,10 +35,12 @@ class Plane :public Entity,public Subject
 {
 public:
 	virtual void Update();
-	void moveUpdate(block b1, block b2,int &cp);
+	void moveUpdate(block b1, block b2);
 	virtual void Input(sf::Event& event, int diceNumber);
 	virtual void Init();
 	void move(int step);
+	void setrotation();
+	void fly();
 	enum {
 		HOME,
 		READY,
@@ -47,6 +49,7 @@ public:
 		FINAL
 	}state = HOME;
 	PlanePoolUnit* PPU;
+	Texture finaltexture;
 	int lastpos = 0;
 	//已经走过的格子数
 	int stepcount=0;
@@ -60,33 +63,51 @@ public:
 	float movespeed = 0.2;
 
 	int currentpos;
+
+	bool doFly;
+
+	float final_ready_rotation;
 };
 class RedPlane : public Plane
 {
 public:
-	RedPlane(PlanePoolUnit* PPU_) { PlaneInit(4, 1, 53, 58, "./data/Entity/red_player.png"); }
+	RedPlane(PlanePoolUnit* PPU_) {
+		PlaneInit(4, 1, 53, 58, "./data/Entity/red_player.png");
+		this->finaltexture.loadFromFile("./data/Entity/red_player_final.png");
+		final_ready_rotation = 180;
+
+	}
 };
 class YellowPlane : public Plane
 {
 public:
-	YellowPlane(PlanePoolUnit* PPU_) { PlaneInit(17, 14, 59, 64, "./data/Entity/yellow_player.png"); }
+	YellowPlane(PlanePoolUnit* PPU_) { PlaneInit(17, 14, 59, 64, "./data/Entity/yellow_player.png");
+	this->finaltexture.loadFromFile("./data/Entity/yellow_player_final.png");
+	final_ready_rotation = -90;
+
+	}
 };
 class BluePlane : public Plane
 {
 public:
-	BluePlane(PlanePoolUnit* PPU_) { PlaneInit(30, 27, 65, 70, "./data/Entity/blue_player.png"); }
+	BluePlane(PlanePoolUnit* PPU_) { PlaneInit(30, 27, 65, 70, "./data/Entity/blue_player.png");
+	this->finaltexture.loadFromFile("./data/Entity/blue_player_final.png");
+	final_ready_rotation = 0;
+	}
 };
 class GreenPlane : public Plane
 {
 public:
-	GreenPlane(PlanePoolUnit* PPU_) { PlaneInit(43, 40, 71, 76, "./data/Entity/green_player.png"); }
+	GreenPlane(PlanePoolUnit* PPU_) { PlaneInit(43, 40, 71, 76, "./data/Entity/green_player.png");
+	this->finaltexture.loadFromFile("./data/Entity/green_player_final.png");
+	final_ready_rotation = 90;
+	}
 };
 class PlanePoolUnit
 {
 public:
 	void AddObserver(Observer* observer);
 	void Update();
-	void Rander();
 	void Input(sf::Event& event, int diceNumber);
 	bool JudgeAvailable(int diceNumber);
 	bool fine=false;
@@ -134,7 +155,6 @@ public:
 	void AddObserver(Observer* observer);
 	void SwitchToNextTurn();
 	void Update();
-	void Rander();
 	void Input(sf::Event& event,int diceNumber);
 	enum {
 		RED,

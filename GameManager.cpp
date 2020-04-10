@@ -42,6 +42,23 @@ void GameManager::GameUpdateLogic()
 	
 }
 
+void GameManager::GameRenderLogic()
+{
+	for (int i = 0;i < BLOCKNUM;i++)
+	{
+		if (chessboard->blocks[i].entityvector.size() != 0)
+		{
+			for (std::list<Entity*>::reverse_iterator iter = chessboard->blocks[i].entityvector.rbegin()
+				;iter != chessboard->blocks[i].entityvector.rend();++iter)
+			{
+				dynamic_cast<Entity*>(*iter)->Rander();
+			}
+		}
+	}
+
+	dice->Rander();
+}
+
 void GameManager::onNotify(Entity* entity_,MVCEvent event)
 {
 	switch (event)

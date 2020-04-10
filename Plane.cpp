@@ -2,7 +2,7 @@
 #include"ChessBoard.h"
 #include<fstream>
 #include<math.h>
-
+#define PI 3.1415926
 
 
 
@@ -14,42 +14,103 @@ void Plane::Update()
 
 	if (state == ONBOARD || state == ONFINAL)
 	{
-		if (currentpos==pos_start)
+		if (lastpos != 0)
 		{
-			block b;
-			b.x = ready_pos_x;
-			b.y = ready_pos_y;
-			moveUpdate(b, cb->blocks[currentpos-1],currentpos);
+			moveUpdate(cb->blocks[lastpos - 1], cb->blocks[pos - 1]);
 		}
-		else if (currentpos !=pos_start)
+		else
 		{
-			int ls = ((currentpos == 1) ? 51 : (currentpos - 2));
-			if (currentpos == pos_final_start)
-				ls = pos_end-1;
-			moveUpdate(cb->blocks[ls], cb->blocks[currentpos - 1], currentpos);
+			block s;
+			s.x = this->ready_pos_x;
+			s.y = this->ready_pos_y;
+			moveUpdate(s, cb->blocks[pos - 1]);
 		}
-
 	}
 	else if (state == HOME || state == FINAL)
 	{
 		this->x = home_pos_x;
 		this->y = home_pos_y;
+		setrotation();
 	}
 	else if (state == READY)
 	{
 		this->x = ready_pos_x;
 		this->y = ready_pos_y;
+		setrotation();
 	}
 	
 	this->sprite.setPosition(x, y);
 	hitbox = this->sprite.getGlobalBounds();
 }
 
-void Plane::moveUpdate(block b1,block b2,int &cp)
+void Plane::setrotation()
 {
-	ChessBoard* cb = ChessBoard::instance();
-		if (this->x != cb->blocks[cp - 1].x
-			|| this->y != cb->blocks[cp - 1].y )
+
+	if (state == ONBOARD)
+	{
+		if ((pos >= 4 && pos <= 6) || pos == 8 || (pos >= 11 && pos <= 16) || pos == 20 || pos == 22 || pos == 23)
+			this->sprite.setRotation(180);
+		if (pos == 7 || pos == 9 || pos == 10 ||
+			(pos >= 43 && pos <= 45) || pos == 47 || (pos >= 50 && pos <= 52))
+			this->sprite.setRotation(90);
+		if ((pos >= 17 && pos <= 19) || pos == 21 || (pos >= 24 && pos <= 29) ||
+			pos == 33 || pos == 35 || pos == 36)
+			this->sprite.setRotation(-90);
+		if ((pos >= 30 && pos <= 32) || pos == 34 || (pos >= 37 && pos <= 42) || pos == 46
+			|| pos == 48 || pos == 49)
+			this->sprite.setRotation(0);
+	}
+	else if (state == ONFINAL)
+	{
+		this->sprite.setRotation(final_ready_rotation);
+	}
+	else if ( state==READY)
+	{
+		this->sprite.setRotation(final_ready_rotation);
+	}
+	else if (state == FINAL)
+	{
+		this->sprite.setRotation(0);
+	}
+	else if (state == HOME)
+	{
+		this->sprite.setRotation(0);
+	}
+	
+}
+void Plane::moveUpdate(block b1,block b2)
+{
+		if (abs(b2.x - this->x) < 0.001
+		&& abs(b2.y - this->y) < float(0.001))
+		{
+			this->x = b2.x;
+			this->y = b2.y;
+			//给观察者发送消息，飞机操作完毕，告知棋盘
+			this->notify(this, MVCEvent::PLANEMOVE_ONBOARD);
+
+			if (doFly)
+			fly();
+			if (pos == pos_final_end)
+			{
+				this->state = FINAL;
+				this->sprite.setTexture(finaltexture);
+			}
+			
+			setrotation();
+			
+			return;
+		}
+
+		float dis_x = b2.x - b1.x;
+		float dis_y = b2.y - b1.y;
+		float alpha = (atan(dis_y / dis_x))*180/PI;
+		if(dis_x>=0)
+		this->sprite.setRotation(90+alpha);
+		else if (dis_x < 0)
+		this->sprite.setRotation(270 +alpha);
+		
+		if (this->x != b2.x
+			|| this->y != b2.y )
 		{
 				float dis_x = b2.x - b1.x;
 				float dis_y = b2.y - b1.y;
@@ -57,21 +118,42 @@ void Plane::moveUpdate(block b1,block b2,int &cp)
 				this->y += dis_y * movespeed;
 		}
 
-		if (abs(cb->blocks[cp - 1].x - this->x) < 0.001
-			&& abs(cb->blocks[cp - 1].y - this->y) < float(0.001))
-		{
-			this->x = cb->blocks[cp - 1].x ;
-			this->y = cb->blocks[cp - 1].y ;
-			if (cp != pos)
-				cp += 1;
-			if(this->state==ONBOARD)
-			if (cp > 52)
-				cp -= 52;
-			if (cp == pos_end + 1)
-				cp = pos_final_start;
-		}
+		
 }
 
+
+void Plane::fly()
+{
+	
+	//如果踩在第二个多次飞行的格子上
+	 if (this->stepcount == 18)
+	{
+		 lastpos = pos;
+		 stepcount += 12;
+		 pos += 12;
+		 if (this->pos > 52)
+		 {
+			 this->pos -= 52;
+		 }
+	}
+	 //如果踩在同颜色的格子上
+	 else if ((stepcount + 2) % 4 == 0 && stepcount < 50&& state == ONBOARD)
+	{
+		 lastpos = pos;
+		 stepcount += 4;
+		 pos += 4;
+		 if (this->pos > 52)
+		 {
+			 this->pos -= 52;
+		 }
+	}
+	 if(stepcount==18||(stepcount==30&&lastpos==18))
+	 doFly = true;
+	 else
+	 doFly = false;
+
+
+}
 void Plane::move(int step)
 {
 	if (state == ONBOARD)
@@ -83,46 +165,15 @@ void Plane::move(int step)
 		{
 			this->pos -= 52;
 		}
-		//如果踩在第一个多次飞行的格子上
-		if (this->stepcount==14)
-		{
-			this->stepcount += 16;
-			this->pos = this->pos_start + 29;
-		}
-		//如果踩在第二个多次飞行的格子上
-		else if (this->stepcount == 18)
-		{
-			this->stepcount += 16;
-			this->pos = this->pos_start+33;
-		}
-		//如果踩在同颜色的格子上
-		else if ((stepcount + 2) % 4 == 0 && stepcount < 50)
-		{
-
-			this->stepcount += 4;
-			this->pos += 4;
-			if (this->pos > 52)
-			{
-				this->pos -= 52;
-			}
-		}
-		if (this->pos > 52)
-		{
-			this->pos -= 52;
-		}
-		
 		if (this->stepcount > 50)
 		{
 			this->state = ONFINAL;
 			this->pos = stepcount - 50 + pos_final_start-1;
-			if (this->pos == this->pos_final_end)
-				this->state = FINAL;
-		}
 		
-		//给观察者发送消息，飞机操作完毕，开始骰子操作
-		this->notify(this,MVCEvent::DICETIME);
-		//给观察者发送消息，飞机操作完毕，告知棋盘
-		this->notify(this, MVCEvent::PLANEMOVE_ONBOARD);
+		}
+		this->notify(this, MVCEvent::DICETIME);
+		
+		doFly = true;
 	}
 	else if (state == HOME&&step == 6)
 	{
@@ -136,27 +187,17 @@ void Plane::move(int step)
 		this->stepcount = step;
 		state = ONBOARD;
 		this->pos = step+this->pos_start-1;
-		if (step == 2 || step == 6)
-		{
-			this->stepcount += 4;
-			this->pos += 4;
-		}
 		//给观察者发送消息，飞机操作完毕，开始骰子操作
 		this->notify(this,MVCEvent::DICETIME);
 		//给观察者发送消息，飞机操作完毕，告知棋盘
-		this->notify(this, MVCEvent::PLANEMOVE_ONBOARD);
+		doFly = true;
 	}
 	else if (state == ONFINAL)
 	{
 		lastpos = pos;
 		stepcount += step;
 		pos += step;
-		if (this->pos == this->pos_final_end)
-		{
-			this->state = FINAL;
-		}
-			
-		else if (this->pos > this->pos_final_end)
+		 if (this->pos > this->pos_final_end)
 		{
 			pos = pos_final_end - (pos - pos_final_end);
 		}
@@ -186,6 +227,7 @@ void Plane::Init()
 	this->pos = 0;
 	this->lastpos = 0;
 	this->currentpos = this->pos_start;
+	this->sprite.setRotation(0);
 }
 
 bool PlanePoolUnit::JudgeAvailable(int diceNumber)
@@ -231,14 +273,6 @@ void PlanePoolUnit::Update()
 
 }
 
-void PlanePoolUnit::Rander()
-{
-	for (int i = 0;i < 4;i++)
-	{
-		plane[i]->Rander();
-	}
-}
-
 void PlanePoolUnit::Input(sf::Event& event, int diceNumber)
 {
 	for (int i = 0;i < 4;i++)
@@ -246,14 +280,6 @@ void PlanePoolUnit::Input(sf::Event& event, int diceNumber)
 		plane[i]->Input(event,diceNumber);
 	}
 }
-
-void PlanePool::Rander()
-{
-	redplanepool.Rander();
-	blueplanepool.Rander();
-	yellowplanepool.Rander();
-	greenplanepool.Rander();
-};
 
 void PlanePool::Update()
 {

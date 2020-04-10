@@ -1,7 +1,6 @@
 #pragma once
 
-#include<set>
-
+#include<list>
 #include<iostream>
 #include<SFML/Audio.hpp>
 #include<SFML/Graphics.hpp>
@@ -9,6 +8,8 @@
 #include"Entity.h"
 #include"MVC.h"
 #include"Plane.h"
+
+#define BLOCKNUM 96
 using namespace sf;
 
 extern class Entity;
@@ -24,7 +25,7 @@ public:
 	void judgehit(Plane* plane_);
 	int rotation;
 	float x, y;
-	std::set<Entity*> entityvector;
+	std::list<Entity*> entityvector;
 };
 
 
@@ -40,7 +41,7 @@ public:
 	virtual void onNotify(Entity* entity_,MVCEvent event);
 	Texture texture;
 	Sprite sprite;
-	block blocks[76];
+	block blocks[96];
 	void getdata();
 private:
 	ChessBoard();

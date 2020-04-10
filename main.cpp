@@ -57,8 +57,7 @@ void Rander()
 {
 	window.draw(spbk);
 	window.draw(ChessBoard::instance()->sprite);
-	gm->planepool->Rander();
-	gm->dice->Rander();
+	gm->GameRenderLogic();
 	window.display();
 }
 

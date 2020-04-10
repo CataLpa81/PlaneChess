@@ -17,18 +17,19 @@ public:
 		static GameManager* instance = new GameManager(dice_,planepool_,chessboard);
 		return instance;
 	}
-	virtual void onNotify(Entity* entity_,MVCEvent event);
-	void GameUpdateLogic();
-	void GameInputLogic(sf::Event event);
 	enum {
 		PLANE,
 		BRIGE_TOPLANE,
 		BRIGE_TODICE,
 		DICE
-	}turn=DICE;
+	}turn = DICE;
 	ChessBoard* chessboard;
 	Dice* dice;
 	PlanePool* planepool;
+	virtual void onNotify(Entity* entity_,MVCEvent event);
+	void GameUpdateLogic();
+	void GameInputLogic(sf::Event event);
+	void GameRenderLogic();
 private:
 	GameManager(Dice* dice_,PlanePool* planepool_, ChessBoard* chessboard_){
 		chessboard = chessboard_;

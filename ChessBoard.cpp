@@ -23,6 +23,21 @@ void ChessBoard::getdata()
 		infile >> a;
 		blocks[i].y = a + sprite.getPosition().y;
 	}
+	for (int i = 76;i < 76 + 16;i++)
+	{
+		infile >> a;
+		blocks[i].x = a + sprite.getPosition().x;
+		infile >> a;
+		blocks[i].y = a + sprite.getPosition().y;
+	}
+
+	for (int i = 92;i < 96;i++)
+	{
+		infile >> a;
+		blocks[i].x = a + sprite.getPosition().x;
+		infile >> a;
+		blocks[i].y = a + sprite.getPosition().y;
+	}
 }
 
 void ChessBoard::onNotify(Entity* entity_,MVCEvent event)
@@ -44,7 +59,7 @@ void block::judgehit(Plane* plane_)
 {
 	if (entityvector.size() >= 2)
 	{
-		for (std::set<Entity*>::iterator iter=entityvector.begin();iter!=entityvector.end();)
+		for (std::list<Entity*>::iterator iter=entityvector.begin();iter!=entityvector.end();)
 		{
 			if (dynamic_cast<Plane*>(*iter))
 			{
@@ -65,11 +80,11 @@ void block::judgehit(Plane* plane_)
 }
 void block::PushToQueue(Entity* entity_)
 {
-	this->entityvector.insert(entity_);
+	this->entityvector.push_back(entity_);
 }
 
 void block::PopFromQueue(Entity* entity_)
 {
-	this->entityvector.erase(entity_);
+	this->entityvector.remove(entity_);
 }
 
