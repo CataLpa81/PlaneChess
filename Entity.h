@@ -17,7 +17,7 @@ public:
 	virtual void Update();
 	virtual void Rander();
 	virtual void Init();
-	int x, y;
+	float x, y;
 	int pos;
 	Texture texture;
 	Sprite sprite;

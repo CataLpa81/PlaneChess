@@ -22,6 +22,7 @@ GameManager* gm;
 
 void Initial()
 {
+	window.setFramerateLimit(140);
 	gm = GameManager::instance(Dice::instance(), PlanePool::instance(), ChessBoard::instance());
 	gm->dice->addObserver(gm);
 	gm->planepool->AddObserver(gm);
@@ -70,4 +71,6 @@ int main()
 		Update();
 		Rander();
 	}
+
+
 }

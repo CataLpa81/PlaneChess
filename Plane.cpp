@@ -1,18 +1,35 @@
 #include"Plane.h"
 #include"ChessBoard.h"
 #include<fstream>
+#include<math.h>
+
+
 
 
 
 
 void Plane::Update()
 {
-	if (state == ONBOARD||state==ONFINAL)
+	ChessBoard* cb = ChessBoard::instance();
+
+	if (state == ONBOARD || state == ONFINAL)
 	{
-		this->x = ChessBoard::instance()->blocks[pos - 1].x + ChessBoard::instance()->sprite.getPosition().x;
-		this->y = ChessBoard::instance()->blocks[pos - 1].y + ChessBoard::instance()->sprite.getPosition().y;
-	
-	}  
+		if (currentpos==pos_start)
+		{
+			block b;
+			b.x = ready_pos_x;
+			b.y = ready_pos_y;
+			moveUpdate(b, cb->blocks[currentpos-1],currentpos);
+		}
+		else if (currentpos !=pos_start)
+		{
+			int ls = ((currentpos == 1) ? 51 : (currentpos - 2));
+			if (currentpos == pos_final_start)
+				ls = pos_end-1;
+			moveUpdate(cb->blocks[ls], cb->blocks[currentpos - 1], currentpos);
+		}
+
+	}
 	else if (state == HOME || state == FINAL)
 	{
 		this->x = home_pos_x;
@@ -23,12 +40,37 @@ void Plane::Update()
 		this->x = ready_pos_x;
 		this->y = ready_pos_y;
 	}
-
+	
 	this->sprite.setPosition(x, y);
 	hitbox = this->sprite.getGlobalBounds();
 }
 
+void Plane::moveUpdate(block b1,block b2,int &cp)
+{
+	ChessBoard* cb = ChessBoard::instance();
+		if (this->x != cb->blocks[cp - 1].x
+			|| this->y != cb->blocks[cp - 1].y )
+		{
+				float dis_x = b2.x - b1.x;
+				float dis_y = b2.y - b1.y;
+				this->x += dis_x * movespeed;
+				this->y += dis_y * movespeed;
+		}
 
+		if (abs(cb->blocks[cp - 1].x - this->x) < 0.001
+			&& abs(cb->blocks[cp - 1].y - this->y) < float(0.001))
+		{
+			this->x = cb->blocks[cp - 1].x ;
+			this->y = cb->blocks[cp - 1].y ;
+			if (cp != pos)
+				cp += 1;
+			if(this->state==ONBOARD)
+			if (cp > 52)
+				cp -= 52;
+			if (cp == pos_end + 1)
+				cp = pos_final_start;
+		}
+}
 
 void Plane::move(int step)
 {
@@ -106,6 +148,7 @@ void Plane::move(int step)
 	}
 	else if (state == ONFINAL)
 	{
+		lastpos = pos;
 		stepcount += step;
 		pos += step;
 		if (this->pos == this->pos_final_end)
@@ -142,6 +185,7 @@ void Plane::Init()
 	this->stepcount = 0;
 	this->pos = 0;
 	this->lastpos = 0;
+	this->currentpos = this->pos_start;
 }
 
 bool PlanePoolUnit::JudgeAvailable(int diceNumber)

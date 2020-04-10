@@ -4,8 +4,9 @@
 
 ChessBoard::ChessBoard()
 {
-	this->getdata();
+	
 	this->sprite.setPosition(50, 100);
+	this->getdata();
 }
 
 void ChessBoard::getdata()
@@ -18,9 +19,9 @@ void ChessBoard::getdata()
 	{
 		infile >> a;
 		std::cout << a << " ";
-		blocks[i].x = a;
+		blocks[i].x = a + sprite.getPosition().x;
 		infile >> a;
-		blocks[i].y = a;
+		blocks[i].y = a + sprite.getPosition().y;
 	}
 }
 

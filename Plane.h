@@ -12,6 +12,7 @@ pos_start = ps;\
 pos_end = pe;\
 pos_final_start = pfs;\
 pos_final_end = pfe;\
+currentpos=pos_start;\
 this->texture.loadFromFile(lff);\
 this->sprite.setTexture(this->texture);\
 this->sprite.setOrigin(this->texture.getSize().x / 2, this->texture.getSize().y / 2)
@@ -26,6 +27,7 @@ extern class BluePlane;
 extern class GreenPlane;
 extern class PlanePool;
 extern class Entity;
+extern class block;
 
 extern sf::RenderWindow window;
 
@@ -33,6 +35,7 @@ class Plane :public Entity,public Subject
 {
 public:
 	virtual void Update();
+	void moveUpdate(block b1, block b2,int &cp);
 	virtual void Input(sf::Event& event, int diceNumber);
 	virtual void Init();
 	void move(int step);
@@ -53,6 +56,10 @@ public:
 	int ready_pos_x, ready_pos_y;
 	//飞机的各种位置
 	int pos_start, pos_end, pos_final_start, pos_final_end;
+	//飞行动画的步进
+	float movespeed = 0.2;
+
+	int currentpos;
 };
 class RedPlane : public Plane
 {
@@ -62,9 +69,8 @@ public:
 class YellowPlane : public Plane
 {
 public:
-	YellowPlane(PlanePoolUnit* PPU_) { PlaneInit(17, 14, 49, 64, "./data/Entity/yellow_player.png"); }
+	YellowPlane(PlanePoolUnit* PPU_) { PlaneInit(17, 14, 59, 64, "./data/Entity/yellow_player.png"); }
 };
-
 class BluePlane : public Plane
 {
 public:

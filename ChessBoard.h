@@ -23,7 +23,7 @@ public:
 	void PopFromQueue(Entity* entity_);
 	void judgehit(Plane* plane_);
 	int rotation;
-	int x, y;
+	float x, y;
 	std::set<Entity*> entityvector;
 };
 
