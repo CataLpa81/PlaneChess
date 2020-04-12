@@ -4,7 +4,7 @@
 #include<fstream>
 #include"Entity.h"
 #include"MVC.h"
-
+#include"Dice.h"
 extern class ChessBoard;
 extern class PlanePool;
 extern class Dice;

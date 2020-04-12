@@ -40,6 +40,7 @@ void GameManager::GameUpdateLogic()
 {
 	planepool->Update();
 	//chessboard->Update();
+	dice->Update();
 }
 
 void GameManager::GameRenderLogic()

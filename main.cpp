@@ -6,6 +6,7 @@
 #include"Entity.h"
 #include"Plane.h"
 #include"GameManager.h"
+#include"Dice.h"
 #define WIDTH 1200
 #define HEIGHT 800
 
@@ -22,12 +23,11 @@ GameManager* gm;
 
 void Initial()
 {
-	window.setFramerateLimit(140);
+	window.setFramerateLimit(30);
 	gm = GameManager::instance(Dice::instance(), PlanePool::instance(), ChessBoard::instance());
 	gm->dice->addObserver(gm);
 	gm->planepool->AddObserver(gm);
 	gm->planepool->AddObserver(gm->chessboard);
-	window.setFramerateLimit(10);
 	tbk.loadFromFile("./data/background/sky.jpg");
 	spbk.setTexture(tbk);
 	ChessBoard::instance()->texture.loadFromFile("./data/Background/chessboard.png");

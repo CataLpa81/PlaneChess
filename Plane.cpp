@@ -302,6 +302,8 @@ void PlanePool::Render()
 	blueplanepool.Render();
 	yellowplanepool.Render();
 	greenplanepool.Render();
+
+	window.draw(turnsign);
 };
 
 void PlanePool::Update()
@@ -310,6 +312,12 @@ void PlanePool::Update()
 	blueplanepool.Update();
 	yellowplanepool.Update();
 	greenplanepool.Update();
+
+	if (clock.getElapsedTime().asMilliseconds() > 500)
+	{
+		SetTurnSignPos();
+	}
+	
 }
 
 PlanePool::PlanePool()
@@ -383,7 +391,10 @@ PlanePool::PlanePool()
 	currentpool = &redplanepool;
 	std::cout << "red turn" << std::endl;
 
-	
+	tturnsign.loadFromFile("./data/UI/turnsign.png");
+	turnsign.setTexture(tturnsign);
+	turnsign.setOrigin(25, 25);
+	SetTurnSignPos();
 	
 }
 
@@ -415,6 +426,28 @@ void PlanePool::SwitchToNextTurn()
 		this->TURN = RED;
 		currentpool = &redplanepool;
 		std::cout << "red turn" << std::endl;
+		break;
+	default:
+		break;
+	}
+	clock.restart();
+}
+
+void PlanePool::SetTurnSignPos()
+{
+	switch (TURN)
+	{
+	case RED:
+		turnsign.setPosition(50+600-25,100+25);
+		break;
+	case YELLOW:
+		turnsign.setPosition(50+600-25,100+600-25);
+		break;
+	case BLUE:
+		turnsign.setPosition(50+25,100+600-25);
+		break;
+	case GREEN:
+		turnsign.setPosition(50+25,100+25);
 		break;
 	default:
 		break;

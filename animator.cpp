@@ -14,7 +14,7 @@ void Animation::Update()
 	if (current_Frame < total_Frames)
 	{
 		//动画贴图当前位置加上一个size，相当于往前移动一个贴图
-		Current.x += Size.x;
+		Current.y += Size.y;
 		//当前所在帧加1
 		current_Frame++;
 	}
@@ -40,7 +40,7 @@ Animation::Animation(sf::String Animation_Name, Vector2i size
 	//设置贴图单位的大小
 	Size = size;
 	//设置动画贴图的起始位置
-	Start = Vector2i(0 + (start_frame - 1) * size.x, 0);
+	Start = Vector2i(0 , 0 + (start_frame - 1) * size.y);
 	//设置起始帧
 	start_Frame = start_frame;
 	//设置总帧数

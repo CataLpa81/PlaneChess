@@ -24,24 +24,6 @@ public:
 	sf::FloatRect hitbox;
 };
 
-class Dice : public Entity,public Subject
-{
-public:
-	//µ¥ÀýÄ£Ê½
-	static Dice* instance()
-	{
-		static Dice* instance = new Dice();
-		return instance;
-	}
-	virtual void Update();
-	virtual void Rander();
-	int createNumber();
-	int Number;
-	void input(sf::Event& event);
-
-private:
-	Dice();
-};
 
 
 

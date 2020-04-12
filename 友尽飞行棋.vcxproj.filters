@@ -33,6 +33,12 @@
     <ClCompile Include="MVC.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="animator.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="dice.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChessBoard.h">
@@ -48,6 +54,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="MVC.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="animator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Dice.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

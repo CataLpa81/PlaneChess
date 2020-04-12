@@ -161,6 +161,7 @@ public:
 	void Update();
 	void Render();
 	void Input(sf::Event& event,int diceNumber);
+	void SetTurnSignPos();
 	enum {
 		RED,
 		YELLOW,
@@ -172,6 +173,11 @@ public:
 	BluePlanePool blueplanepool;
 	YellowPlanePool yellowplanepool;
 	GreenPlanePool greenplanepool;
+
+	Texture tturnsign;
+	Sprite turnsign;
+
+	Clock clock;
 private:
 	PlanePool();
 
