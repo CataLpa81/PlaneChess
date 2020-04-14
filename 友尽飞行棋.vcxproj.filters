@@ -39,6 +39,15 @@
     <ClCompile Include="dice.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="BeginInterface.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChessBoard.h">
@@ -60,6 +69,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Dice.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BeginInterface.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

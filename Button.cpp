@@ -1,0 +1,91 @@
+#include"Button.h"
+#include"Game.h"
+void Button::InitTexture()
+{
+	TV.x = texture.getSize().x / 3;
+	TV.y = texture.getSize().y;
+	setTexture(1);
+}
+
+void Button::setPosition(int x,int y)
+{
+	this->sprite.setPosition(x, y);
+	this->hitbox = sprite.getGlobalBounds();
+}
+
+void Button::setOriginCenter()
+{
+	this->sprite.setOrigin(this->texture.getSize().x / 6, this->texture.getSize().y / 2);
+}
+
+void Button::Render()
+{
+	window.draw(this->sprite);
+}
+
+
+void Button::Input(Event event)
+{
+	if (event.type == Event::MouseButtonReleased
+		&& event.mouseButton.button == sf::Mouse::Left
+		)
+	{
+		if (this->hitbox.contains((sf::Vector2f)sf::Mouse::getPosition(window)))
+		{
+			OnRelese();
+		}
+		setTexture(IDLE);
+		isPressed = false;
+	}
+
+	 if (event.type == Event::MouseButtonPressed
+		&& event.mouseButton.button == sf::Mouse::Left
+		&& this->hitbox.contains((sf::Vector2f)sf::Mouse::getPosition(window)))
+	{
+		setTexture(PRESS);
+		OnPress();
+		isPressed = true;
+	}
+
+	 if (isPressed == false)
+	 {
+		 if (event.type == Event::MouseMoved
+			 && this->hitbox.contains((sf::Vector2f)sf::Mouse::getPosition(window)))
+		 {
+			 setTexture(MOVE);
+			 OnMove();
+		 }
+
+		 if (event.type == Event::MouseMoved
+			 && !this->hitbox.contains((sf::Vector2f)sf::Mouse::getPosition(window)))
+		 {
+			 setTexture(IDLE);
+		 }
+	 }
+	 
+
+}
+
+void Button::setTexture(int frame)
+{
+	sf::Rect<int> TRect(Vector2i(TV.x*(frame-1),0), TV);
+	this->sprite.setTextureRect(TRect);
+}
+
+btnLocalGame::btnLocalGame()
+{
+	this->texture.loadFromFile("./data/UI/btn_localgame.png");
+	this->sprite.setTexture(texture);
+	InitTexture();
+	setOriginCenter();
+}
+
+void btnLocalGame::OnPress()
+{
+	
+}
+
+void btnLocalGame::OnRelese()
+{
+	GP = GameScence::GAME;
+}

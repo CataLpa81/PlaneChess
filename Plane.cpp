@@ -46,7 +46,7 @@ void Plane::setrotation()
 	{
 		if ((pos >= 4 && pos <= 6) || pos == 8 || (pos >= 11 && pos <= 16) || pos == 20 || pos == 22 || pos == 23)
 			this->sprite.setRotation(180);
-		if (pos == 7 || pos == 9 || pos == 10 ||
+		if ((pos>=1&&pos<=3)||pos == 7 || pos == 9 || pos == 10 ||
 			(pos >= 43 && pos <= 45) || pos == 47 || (pos >= 50 && pos <= 52))
 			this->sprite.setRotation(90);
 		if ((pos >= 17 && pos <= 19) || pos == 21 || (pos >= 24 && pos <= 29) ||
