@@ -149,12 +149,19 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="ChessBoard.cpp" />
     <ClCompile Include="dice.cpp" />
+    <ClCompile Include="Dice_Client.cpp" />
+    <ClCompile Include="Dice_Server.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MVC.cpp" />
+    <ClCompile Include="NerWork_Client.cpp" />
+    <ClCompile Include="NetWork.cpp" />
+    <ClCompile Include="NetWork_Server.cpp" />
     <ClCompile Include="Plane.cpp" />
+    <ClCompile Include="Plane_Client.cpp" />
+    <ClCompile Include="Plane_Server.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animator.h" />
@@ -162,11 +169,18 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="ChessBoard.h" />
     <ClInclude Include="Dice.h" />
+    <ClInclude Include="Dice_Client.h" />
+    <ClInclude Include="Dice_Server.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="MVC.h" />
+    <ClInclude Include="NetWork.h" />
+    <ClInclude Include="NetWork_Client.h" />
+    <ClInclude Include="NetWork_Server.h" />
     <ClInclude Include="Plane.h" />
+    <ClInclude Include="Plane_Client.h" />
+    <ClInclude Include="Plane_Server.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

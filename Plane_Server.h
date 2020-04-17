@@ -1,9 +1,12 @@
 #pragma once
+#pragma once
 #include<SFML/Audio.hpp>
 #include<SFML/Graphics.hpp>
 #include<SFML/Window.hpp>
 #include"ChessBoard.h"
 #include"Entity.h"
+#include"NetWork_Client.h"
+#include"NetWork_Server.h"
 
 #define PlaneInit(ps,pe,pfs,pfe,lff)\
 this->PPU=PPU_;\
@@ -30,7 +33,7 @@ extern class block;
 
 extern sf::RenderWindow window;
 
-class Plane :public Entity,public Subject
+class Plane :public Entity, public Subject
 {
 public:
 	virtual void Update();
@@ -51,7 +54,7 @@ public:
 	Texture finaltexture;
 	int lastpos = 0;
 	//已经走过的格子数
-	int stepcount=0;
+	int stepcount = 0;
 	//家的位置
 	int home_pos_x, home_pos_y;
 	//准备起飞的位置
@@ -67,7 +70,7 @@ public:
 
 	float final_ready_rotation;
 
-	
+
 };
 class RedPlane : public Plane
 {
@@ -82,26 +85,29 @@ public:
 class YellowPlane : public Plane
 {
 public:
-	YellowPlane(PlanePoolUnit* PPU_) { PlaneInit(17, 14, 59, 64, "./data/Entity/yellow_player.png");
-	this->finaltexture.loadFromFile("./data/Entity/yellow_player_final.png");
-	final_ready_rotation = -90;
+	YellowPlane(PlanePoolUnit* PPU_) {
+		PlaneInit(17, 14, 59, 64, "./data/Entity/yellow_player.png");
+		this->finaltexture.loadFromFile("./data/Entity/yellow_player_final.png");
+		final_ready_rotation = -90;
 
 	}
 };
 class BluePlane : public Plane
 {
 public:
-	BluePlane(PlanePoolUnit* PPU_) { PlaneInit(30, 27, 65, 70, "./data/Entity/blue_player.png");
-	this->finaltexture.loadFromFile("./data/Entity/blue_player_final.png");
-	final_ready_rotation = 0;
+	BluePlane(PlanePoolUnit* PPU_) {
+		PlaneInit(30, 27, 65, 70, "./data/Entity/blue_player.png");
+		this->finaltexture.loadFromFile("./data/Entity/blue_player_final.png");
+		final_ready_rotation = 0;
 	}
 };
 class GreenPlane : public Plane
 {
 public:
-	GreenPlane(PlanePoolUnit* PPU_) { PlaneInit(43, 40, 71, 76, "./data/Entity/green_player.png");
-	this->finaltexture.loadFromFile("./data/Entity/green_player_final.png");
-	final_ready_rotation=90;
+	GreenPlane(PlanePoolUnit* PPU_) {
+		PlaneInit(43, 40, 71, 76, "./data/Entity/green_player.png");
+		this->finaltexture.loadFromFile("./data/Entity/green_player_final.png");
+		final_ready_rotation = 90;
 	}
 };
 class PlanePoolUnit
@@ -112,17 +118,17 @@ public:
 	void Render();
 	void Input(sf::Event& event, int diceNumber);
 	bool JudgeAvailable(int diceNumber);
-	bool fine=false;
+	bool fine = false;
 	Plane* plane[4];
 	int ready_num = 0;
 };
 
-class RedPlanePool:public PlanePoolUnit
+class RedPlanePool :public PlanePoolUnit
 {
 public:
 	friend PlanePool;
 private:
-	RedPlanePool(){ for (int i = 0;i < 4;i++)this->plane[i] = new RedPlane(this); }
+	RedPlanePool() { for (int i = 0;i < 4;i++)this->plane[i] = new RedPlane(this); }
 };
 class BluePlanePool :public PlanePoolUnit
 {
@@ -159,7 +165,7 @@ public:
 	void SwitchToNextTurn();
 	void Update();
 	void Render();
-	void Input(sf::Event& event,int diceNumber);
+	void Input(sf::Event& event, int diceNumber);
 	void SetTurnSignPos();
 	enum {
 		RED,

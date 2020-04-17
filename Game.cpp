@@ -1,4 +1,5 @@
 #include"Game.h"
+#include<functional>
 
 GameScence GP;
 
@@ -20,6 +21,8 @@ void Game::Initial()
 	bi = BeginInterface::Instance();
 }
 
+
+
 void Game::Input()
 {
 	sf::Event event;  //接受窗口事件
@@ -33,7 +36,20 @@ void Game::Input()
 
 		if (GP == GameScence::GAME)
 			gm->GameInputLogic(event);
+
+		if (event.type == sf::Event::EventType::KeyPressed && event.key.code == sf::Keyboard::S)
+		{
+			static std::thread t1(&Server::Run,&s);
+			IsServer = true;
+		}
+
+		if (event.type == sf::Event::EventType::KeyPressed && event.key.code == sf::Keyboard::C)
+		{
+			static std::thread t2(&Client::Run, &c);
+			IsClient = true;
+		}
 	}
+
 
 }
 
@@ -41,6 +57,7 @@ void Game::Update()
 {
 	if (GP == GameScence::GAME)
 		gm->GameUpdateLogic();
+	
 }
 
 void Game::Rander()
@@ -62,6 +79,7 @@ void Game::Run()
 	Initial();
 	while (1)
 	{
+
 		Input();
 		Update();
 		Rander();

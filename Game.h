@@ -9,8 +9,12 @@
 #include"GameManager.h"
 #include"Dice.h"
 #include"BeginInterface.h"
+#include"NetWork_Client.h"
+#include"NetWork_Server.h"
 #define WIDTH 1200
 #define HEIGHT 800
+
+using namespace std;
 
 enum class GameScence
 {
@@ -39,6 +43,11 @@ public:
 
 	GameManager* gm;
 	BeginInterface* bi;
+
+	bool IsServer=false;
+	bool IsClient=false;
+	Server s;
+	Client c;
 private:
 	Game() {};
 

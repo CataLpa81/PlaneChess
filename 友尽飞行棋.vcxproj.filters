@@ -48,6 +48,27 @@
     <ClCompile Include="Game.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="NetWork_Server.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="NerWork_Client.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="NetWork.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Plane_Client.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Plane_Server.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Dice_Server.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Dice_Client.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChessBoard.h">
@@ -78,6 +99,27 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="NetWork_Server.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="NetWork_Client.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="NetWork.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane_Client.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane_Server.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Dice_Client.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Dice_Server.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
