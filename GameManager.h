@@ -6,10 +6,8 @@
 #include"MVC.h"
 #include"Plane.h"
 #include"Plane_Client.h"
-#include"Plane_Server.h"
 #include"Dice.h"
 #include"Dice_Client.h"
-#include"Dice_Server.h"
 #include"NetWork_Client.h"
 #include"NetWork_Server.h"
 
@@ -40,37 +38,6 @@ public:
 	void GameRenderLogic();
 private:
 	GameManager(Dice* dice_,PlanePool* planepool_, ChessBoard* chessboard_){
-		chessboard = chessboard_;
-		dice = dice_;
-		planepool = planepool_;
-	}
-
-
-};
-
-class GameManagerServer :public Observer
-{
-public:
-	static GameManagerServer* instance(Dice* dice_, PlanePool* planepool_, ChessBoard* chessboard)
-	{
-		static GameManagerServer* instance = new GameManagerServer(dice_, planepool_, chessboard);
-		return instance;
-	}
-	enum {
-		PLANE,
-		BRIGE_TOPLANE,
-		BRIGE_TODICE,
-		DICE
-	}turn = DICE;
-	ChessBoard* chessboard;
-	Dice* dice;
-	PlanePool* planepool;
-	virtual void onNotify(Entity* entity_, MVCEvent event);
-	void GameUpdateLogic();
-	void GameInputLogic(sf::Event event);
-	void GameRenderLogic();
-private:
-	GameManagerServer(Dice* dice_, PlanePool* planepool_, ChessBoard* chessboard_) {
 		chessboard = chessboard_;
 		dice = dice_;
 		planepool = planepool_;

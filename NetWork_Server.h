@@ -4,7 +4,6 @@
 #include<set>
 #include<thread>
 #include<iostream>
-#include"Plane.h"
 #include"NetWork.h"
 class Server
 {
@@ -16,11 +15,12 @@ public:
 	}
 	sf::TcpListener listener;
 	std::set<sf::TcpSocket*> SocketSet;
-	sf::Packet packet;
 	int x;
 	void Run();
 	void Receive(sf::TcpSocket* TS);
 	void SendPPU(sf::TcpSocket* ts);
+	void processDICE(sf::Packet&, sf::TcpSocket* ts);
+	void processPLANE(sf::Packet&, sf::TcpSocket* ts);
 private:
-	Server(){}
+	Server() {}
 };

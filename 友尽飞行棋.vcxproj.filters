@@ -60,9 +60,6 @@
     <ClCompile Include="Plane_Client.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Plane_Server.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Dice_Server.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -113,13 +110,7 @@
     <ClInclude Include="Plane_Client.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Plane_Server.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Dice_Client.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Dice_Server.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

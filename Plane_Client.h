@@ -38,7 +38,7 @@ class Plane_Client :public Entity, public Subject
 public:
 	virtual void Update();
 	void moveUpdate(block b1, block b2);
-	virtual void Input(sf::Event& event, int diceNumber);
+	virtual void Input(sf::Event& event, int diceNumber, bool& isInput);
 	virtual void Init();
 	void move(int step);
 	void setrotation();
@@ -69,6 +69,8 @@ public:
 	bool doFly;
 
 	float final_ready_rotation;
+
+	sf::Uint8 PPUNumber;
 
 
 };
@@ -117,10 +119,11 @@ public:
 	void Update();
 	void Render();
 	void Input(sf::Event& event, int diceNumber);
-	void Input(sf::Packet& packet,int diceNumber);
+	void Input(sf::Packet& packet, int diceNumber);
 	bool JudgeAvailable(int diceNumber);
 	bool fine = false;
-	Plane_Client* Plane_Client[4];
+	bool isInput;
+	Plane_Client* plane_Client[4];
 	int ready_num = 0;
 };
 
@@ -129,28 +132,28 @@ class RedPlane_ClientPool :public Plane_ClientPoolUnit
 public:
 	friend Plane_ClientPool;
 private:
-	RedPlane_ClientPool() { for (int i = 0;i < 4;i++)this->Plane_Client[i] = new RedPlane_Client(this); }
+	RedPlane_ClientPool() { for (int i = 0;i < 4;i++) { this->plane_Client[i] = new RedPlane_Client(this); this->plane_Client[i]->PPUNumber = i; } }
 };
 class BluePlane_ClientPool :public Plane_ClientPoolUnit
 {
 public:
 	friend Plane_ClientPool;
 private:
-	BluePlane_ClientPool() { for (int i = 0;i < 4;i++)this->Plane_Client[i] = new BluePlane_Client(this); }
+	BluePlane_ClientPool() { for (int i = 0;i < 4;i++) { this->plane_Client[i] = new BluePlane_Client(this);this->plane_Client[i]->PPUNumber = i; } }
 };
 class YellowPlane_ClientPool :public Plane_ClientPoolUnit
 {
 public:
 	friend Plane_ClientPool;
 private:
-	YellowPlane_ClientPool() { for (int i = 0;i < 4;i++)this->Plane_Client[i] = new YellowPlane_Client(this); }
+	YellowPlane_ClientPool() { for (int i = 0;i < 4;i++) { this->plane_Client[i] = new YellowPlane_Client(this);this->plane_Client[i]->PPUNumber = i; } }
 };
 class GreenPlane_ClientPool :public Plane_ClientPoolUnit
 {
 public:
 	friend Plane_ClientPool;
 private:
-	GreenPlane_ClientPool() { for (int i = 0;i < 4;i++)this->Plane_Client[i] = new GreenPlane_Client(this); }
+	GreenPlane_ClientPool() { for (int i = 0;i < 4;i++) { this->plane_Client[i] = new GreenPlane_Client(this); this->plane_Client[i]->PPUNumber = i; } }
 };
 
 class Plane_ClientPool

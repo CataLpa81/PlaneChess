@@ -2,7 +2,7 @@
 
 #include<SFML/Network.hpp>
 #include<iostream>
-#include"Plane.h"
+#include"Plane_Client.h"
 #include"NetWork.h"
 
 class Client
@@ -17,8 +17,6 @@ public:
 	sf::Packet packet;
 	sf::Clock clock;
 	void Run();
-	void SendPPU();
-	void RecivePPU();
 private:
-	Client();
+	Client() {}
 };

@@ -34,18 +34,18 @@ void Game::Input()
 		if (GP == GameScence::BEGIN)
 			bi->Input(event);
 
-		if (GP == GameScence::GAME)
+		if (GP == GameScence::LOCALGAME)
 			gm->GameInputLogic(event);
 
 		if (event.type == sf::Event::EventType::KeyPressed && event.key.code == sf::Keyboard::S)
 		{
-			static std::thread t1(&Server::Run,&s);
+			static std::thread t1(&Server::Run,s);
 			IsServer = true;
 		}
 
 		if (event.type == sf::Event::EventType::KeyPressed && event.key.code == sf::Keyboard::C)
 		{
-			static std::thread t2(&Client::Run, &c);
+			static std::thread t2(&Client::Run,c);
 			IsClient = true;
 		}
 	}
@@ -55,7 +55,7 @@ void Game::Input()
 
 void Game::Update()
 {
-	if (GP == GameScence::GAME)
+	if (GP == GameScence::LOCALGAME)
 		gm->GameUpdateLogic();
 	
 }
@@ -68,7 +68,7 @@ void Game::Rander()
 	if (GP == GameScence::BEGIN)
 		bi->Render();
 
-	if (GP == GameScence::GAME)
+	if (GP == GameScence::LOCALGAME)
 		gm->GameRenderLogic();
 
 	window.display();

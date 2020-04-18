@@ -196,6 +196,7 @@ void Plane_Client::move(int step)
 			this->notify(this, MVCEvent::DICETIME);
 			//给观察者发送消息，飞机操作完毕，告知棋盘
 			doFly = true;
+			std::cout << "planenumber" << this->PPUNumber << "goONboard" << std::endl;
 		}
 
 	}
@@ -216,15 +217,23 @@ void Plane_Client::move(int step)
 
 }
 
-void Plane_Client::Input(sf::Event& event, int diceNumber)
+void Plane_Client::Input(sf::Event& event, int diceNumber, bool& isInput)
 {
 	//当鼠标左键在飞机上释放时
 	if (event.type == Event::MouseButtonReleased
 		&& event.mouseButton.button == sf::Mouse::Left
 		&& this->hitbox.contains((sf::Vector2f)sf::Mouse::getPosition(window)))
 	{
+		sf::Packet packet;
+
+		sf::Uint32 data = 'PLNE';
+		Client::Instance()->socket.send(&data, sizeof(sf::Uint32));
+		packet << this->PPUNumber;
+		//把飞机操作的结果发送给服务端
+		Client::Instance()->socket.send(packet);
 		this->move(diceNumber);
-		sf::Packet;
+
+		isInput = true;
 	}
 }
 
@@ -250,7 +259,7 @@ bool Plane_ClientPoolUnit::JudgeAvailable(int diceNumber)
 	{
 		for (int i = 0;i < 4;i++)
 		{
-			if (Plane_Client[i]->state != Plane_Client::HOME && Plane_Client[i]->state != Plane_Client::FINAL)
+			if (plane_Client[i]->state != Plane_Client::HOME && plane_Client[i]->state != Plane_Client::FINAL)
 				return true;
 		}
 	}
@@ -262,7 +271,7 @@ void Plane_ClientPoolUnit::AddObserver(Observer* observer)
 {
 	for (int i = 0;i < 4;i++)
 	{
-		this->Plane_Client[i]->addObserver(observer);
+		this->plane_Client[i]->addObserver(observer);
 	}
 }
 void Plane_ClientPoolUnit::Update()
@@ -270,8 +279,8 @@ void Plane_ClientPoolUnit::Update()
 	int fineCount = 0;
 	for (int i = 0;i < 4;i++)
 	{
-		Plane_Client[i]->Update();
-		if (Plane_Client[i]->state == Plane_Client::FINAL)
+		plane_Client[i]->Update();
+		if (plane_Client[i]->state == Plane_Client::FINAL)
 		{
 			fineCount += 1;
 			if (fineCount == 4)
@@ -287,15 +296,17 @@ void Plane_ClientPoolUnit::Render()
 {
 	for (int i = 0;i < 4;i++)
 	{
-		Plane_Client[i]->Rander();
+		plane_Client[i]->Rander();
 	}
 }
 
 void Plane_ClientPoolUnit::Input(sf::Event& event, int diceNumber)
 {
+	isInput = false;
 	for (int i = 0;i < 4;i++)
 	{
-		Plane_Client[i]->Input(event, diceNumber);
+		if (!isInput)
+			plane_Client[i]->Input(event, diceNumber, isInput);
 	}
 }
 
@@ -305,7 +316,7 @@ void Plane_ClientPoolUnit::Input(sf::Packet& packet, int diceNumber)
 	//接收到操作的飞机的序号
 	sf::Uint8 PlaneNumber;
 	packet >> PlaneNumber;
-	Plane_Client[PlaneNumber]->move(diceNumber);
+	plane_Client[PlaneNumber]->move(diceNumber);
 
 }
 
@@ -342,33 +353,33 @@ Plane_ClientPool::Plane_ClientPool()
 	{
 		int a;
 		infile >> a;
-		greenPlane_Clientpool.Plane_Client[i]->home_pos_x = a + ChessBoard::instance()->sprite.getPosition().x;
+		greenPlane_Clientpool.plane_Client[i]->home_pos_x = a + ChessBoard::instance()->sprite.getPosition().x;
 		infile >> a;
-		greenPlane_Clientpool.Plane_Client[i]->home_pos_y = a + ChessBoard::instance()->sprite.getPosition().y;
+		greenPlane_Clientpool.plane_Client[i]->home_pos_y = a + ChessBoard::instance()->sprite.getPosition().y;
 	}
 	for (int i = 0;i < 4;i++)
 	{
 		int a;
 		infile >> a;
-		redPlane_Clientpool.Plane_Client[i]->home_pos_x = a + ChessBoard::instance()->sprite.getPosition().x;
+		redPlane_Clientpool.plane_Client[i]->home_pos_x = a + ChessBoard::instance()->sprite.getPosition().x;
 		infile >> a;
-		redPlane_Clientpool.Plane_Client[i]->home_pos_y = a + ChessBoard::instance()->sprite.getPosition().y;
+		redPlane_Clientpool.plane_Client[i]->home_pos_y = a + ChessBoard::instance()->sprite.getPosition().y;
 	}
 	for (int i = 0;i < 4;i++)
 	{
 		int a;
 		infile >> a;
-		yellowPlane_Clientpool.Plane_Client[i]->home_pos_x = a + ChessBoard::instance()->sprite.getPosition().x;
+		yellowPlane_Clientpool.plane_Client[i]->home_pos_x = a + ChessBoard::instance()->sprite.getPosition().x;
 		infile >> a;
-		yellowPlane_Clientpool.Plane_Client[i]->home_pos_y = a + ChessBoard::instance()->sprite.getPosition().y;
+		yellowPlane_Clientpool.plane_Client[i]->home_pos_y = a + ChessBoard::instance()->sprite.getPosition().y;
 	}
 	for (int i = 0;i < 4;i++)
 	{
 		int a;
 		infile >> a;
-		bluePlane_Clientpool.Plane_Client[i]->home_pos_x = a + ChessBoard::instance()->sprite.getPosition().x;
+		bluePlane_Clientpool.plane_Client[i]->home_pos_x = a + ChessBoard::instance()->sprite.getPosition().x;
 		infile >> a;
-		bluePlane_Clientpool.Plane_Client[i]->home_pos_y = a + ChessBoard::instance()->sprite.getPosition().y;
+		bluePlane_Clientpool.plane_Client[i]->home_pos_y = a + ChessBoard::instance()->sprite.getPosition().y;
 	}
 
 	//从文件中读取飞机的出发位置
@@ -377,28 +388,28 @@ Plane_ClientPool::Plane_ClientPool()
 	int b;
 	infile_2 >> b;
 	for (int i = 0;i < 4;i++)
-		greenPlane_Clientpool.Plane_Client[i]->ready_pos_x = b + ChessBoard::instance()->sprite.getPosition().x;
+		greenPlane_Clientpool.plane_Client[i]->ready_pos_x = b + ChessBoard::instance()->sprite.getPosition().x;
 	infile_2 >> b;
 	for (int i = 0;i < 4;i++)
-		greenPlane_Clientpool.Plane_Client[i]->ready_pos_y = b + ChessBoard::instance()->sprite.getPosition().y;
+		greenPlane_Clientpool.plane_Client[i]->ready_pos_y = b + ChessBoard::instance()->sprite.getPosition().y;
 	infile_2 >> b;
 	for (int i = 0;i < 4;i++)
-		redPlane_Clientpool.Plane_Client[i]->ready_pos_x = b + ChessBoard::instance()->sprite.getPosition().x;
+		redPlane_Clientpool.plane_Client[i]->ready_pos_x = b + ChessBoard::instance()->sprite.getPosition().x;
 	infile_2 >> b;
 	for (int i = 0;i < 4;i++)
-		redPlane_Clientpool.Plane_Client[i]->ready_pos_y = b + ChessBoard::instance()->sprite.getPosition().y;
+		redPlane_Clientpool.plane_Client[i]->ready_pos_y = b + ChessBoard::instance()->sprite.getPosition().y;
 	infile_2 >> b;
 	for (int i = 0;i < 4;i++)
-		yellowPlane_Clientpool.Plane_Client[i]->ready_pos_x = b + ChessBoard::instance()->sprite.getPosition().x;
+		yellowPlane_Clientpool.plane_Client[i]->ready_pos_x = b + ChessBoard::instance()->sprite.getPosition().x;
 	infile_2 >> b;
 	for (int i = 0;i < 4;i++)
-		yellowPlane_Clientpool.Plane_Client[i]->ready_pos_y = b + ChessBoard::instance()->sprite.getPosition().y;
+		yellowPlane_Clientpool.plane_Client[i]->ready_pos_y = b + ChessBoard::instance()->sprite.getPosition().y;
 	infile_2 >> b;
 	for (int i = 0;i < 4;i++)
-		bluePlane_Clientpool.Plane_Client[i]->ready_pos_x = b + ChessBoard::instance()->sprite.getPosition().x;
+		bluePlane_Clientpool.plane_Client[i]->ready_pos_x = b + ChessBoard::instance()->sprite.getPosition().x;
 	infile_2 >> b;
 	for (int i = 0;i < 4;i++)
-		bluePlane_Clientpool.Plane_Client[i]->ready_pos_y = b + ChessBoard::instance()->sprite.getPosition().y;
+		bluePlane_Clientpool.plane_Client[i]->ready_pos_y = b + ChessBoard::instance()->sprite.getPosition().y;
 
 
 	currentpool = &redPlane_Clientpool;

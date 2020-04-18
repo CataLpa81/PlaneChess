@@ -161,7 +161,6 @@
     <ClCompile Include="NetWork_Server.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Plane_Client.cpp" />
-    <ClCompile Include="Plane_Server.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animator.h" />
@@ -170,7 +169,6 @@
     <ClInclude Include="ChessBoard.h" />
     <ClInclude Include="Dice.h" />
     <ClInclude Include="Dice_Client.h" />
-    <ClInclude Include="Dice_Server.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameManager.h" />
@@ -180,7 +178,6 @@
     <ClInclude Include="NetWork_Server.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="Plane_Client.h" />
-    <ClInclude Include="Plane_Server.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -43,3 +43,32 @@ public:
 	virtual void OnPress();
 	virtual void OnRelese();
 };
+
+class btnNetGame :public Button
+{
+public:
+	btnNetGame();
+	virtual ~btnNetGame() {};
+	virtual void OnPress();
+	virtual void OnRelese();
+};
+
+
+class btnCreateGame :public Button
+{
+public:
+	btnCreateGame();
+	virtual ~btnCreateGame() {};
+	virtual void OnPress();
+	virtual void OnRelese();
+};
+
+
+class btnJoinGame :public Button
+{
+public:
+	btnJoinGame();
+	virtual ~btnJoinGame() {};
+	virtual void OnPress();
+	virtual void OnRelese();
+};

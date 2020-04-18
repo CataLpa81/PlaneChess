@@ -35,7 +35,7 @@ class Plane :public Entity,public Subject
 public:
 	virtual void Update();
 	void moveUpdate(block b1, block b2);
-	virtual void Input(sf::Event& event, int diceNumber);
+	virtual void Input(sf::Event& event, int diceNumber,bool& isInput);
 	virtual void Init();
 	void move(int step);
 	void setrotation();
@@ -113,6 +113,7 @@ public:
 	void Input(sf::Event& event, int diceNumber);
 	bool JudgeAvailable(int diceNumber);
 	bool fine=false;
+	bool isInput;
 	Plane* plane[4];
 	int ready_num = 0;
 };

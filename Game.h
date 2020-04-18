@@ -19,7 +19,11 @@ using namespace std;
 enum class GameScence
 {
 	BEGIN,
-	GAME,
+	LOCALGAME,
+	NETGAME1,
+	NETGAME2,
+	NETGAME3,
+	NETGAME
 };
 
 extern GameScence GP;
@@ -46,9 +50,12 @@ public:
 
 	bool IsServer=false;
 	bool IsClient=false;
-	Server s;
-	Client c;
+	Server* s;
+	Client* c;
 private:
-	Game() {};
+	Game() {
+		s = Server::Instance();
+		c = Client::Instance();
+	};
 
 };

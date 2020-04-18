@@ -216,7 +216,7 @@ void Plane::move(int step)
 
 }
 
-void Plane::Input(sf::Event& event, int diceNumber)
+void Plane::Input(sf::Event& event, int diceNumber,bool& isInput)
 {
 	//当鼠标左键在飞机上释放时
 	if (event.type == Event::MouseButtonReleased 
@@ -224,6 +224,7 @@ void Plane::Input(sf::Event& event, int diceNumber)
 		&& this->hitbox.contains((sf::Vector2f)sf::Mouse::getPosition(window)))
 	{
 		this->move(diceNumber);
+		isInput = true;
 	}
 }
 
@@ -290,9 +291,11 @@ void PlanePoolUnit::Render()
 
 void PlanePoolUnit::Input(sf::Event& event, int diceNumber)
 {
+	isInput = false;
 	for (int i = 0;i < 4;i++)
 	{
-		plane[i]->Input(event,diceNumber);
+		if (!isInput)
+			plane[i]->Input(event, diceNumber, isInput);
 	}
 }
 

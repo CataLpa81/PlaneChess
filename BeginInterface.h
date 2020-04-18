@@ -19,4 +19,26 @@ private:
 	Texture texture;
 	Sprite sprite;
 	btnLocalGame btnLG;
+	btnNetGame btnNG;
+};
+
+
+class NetGame1_Scence
+{
+public:
+	static NetGame1_Scence* Instance()
+	{
+		static NetGame1_Scence* instance = new NetGame1_Scence();
+		return instance;
+	}
+
+	void Render();
+	void Input(Event event);
+
+private:
+	NetGame1_Scence();
+	Texture texture;
+	Sprite sprite;
+	
+
 };

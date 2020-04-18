@@ -67,84 +67,31 @@ void GameManager::onNotify(Entity* entity_,MVCEvent event)
 }
 
 
-void GameManagerServer::GameInputLogic(sf::Event event)
-{
-	switch (turn)
-	{
-	case GameManagerServer::PLANE:
-		planepool->Input(event, dice->Number);
-		break;
-	case GameManagerServer::BRIGE_TODICE:
-		if (dice->Number != 6)
-			planepool->SwitchToNextTurn();
-		if (planepool->currentpool->fine == true)
-			planepool->SwitchToNextTurn();
-		if (planepool->currentpool->fine == true)
-			planepool->SwitchToNextTurn();
-		if (planepool->currentpool->fine == true)
-			planepool->SwitchToNextTurn();
-		turn = DICE;
-		break;
-	case GameManagerServer::BRIGE_TOPLANE:
-		if (this->planepool->currentpool->JudgeAvailable(dice->Number))
-			turn = PLANE;
-		else
-			turn = BRIGE_TODICE;
-		break;
-	case GameManagerServer::DICE:
-		dice->input(event);
-		break;
-	default:
-		break;
-	}
-
-}
-
-void GameManagerServer::GameUpdateLogic()
-{
-	planepool->Update();
-	//chessboard->Update();
-	dice->Update();
-}
-
-void GameManagerServer::GameRenderLogic()
-{
-
-	planepool->Render();
-	dice->Rander();
-}
-
-void GameManagerServer::onNotify(Entity* entity_, MVCEvent event)
-{
-	switch (event)
-	{
-	case DICETIME:
-		turn = BRIGE_TODICE;
-		break;
-	case PLANETIME:
-		turn = BRIGE_TOPLANE;
-
-		break;
-	default:
-		break;
-	}
-}
-
-
-
-
 
 void GameManagerClient::GameInputLogic(sf::Event event)
 {
+	Client::Instance()->socket.setBlocking(false);
 	switch (turn)
 	{
 	case GameManagerClient::PLANE:
 		if (Player == planepool->TURN)
-			planepool->currentpool->Input(event,dice->Number);
+			planepool->currentpool->Input(event, dice->Number);
 		else
 		{
-			sf::Packet p;
-			planepool->currentpool->Input(p, dice->Number);
+			sf::Uint32* data = (sf::Uint32*)malloc(sizeof(sf::Uint32));
+			std::size_t recived;
+
+			if (Client::Instance()->socket.receive(data, sizeof(Uint32), recived) == sf::Socket::Status::Done);
+			{
+				if (*data == 'PLNE')
+				{
+					sf::Packet packet;
+					Client::Instance()->socket.receive(packet);
+					planepool->currentpool->Input(packet, dice->Number);
+				}
+
+			}
+
 		}
 
 		break;
@@ -170,10 +117,21 @@ void GameManagerClient::GameInputLogic(sf::Event event)
 			dice->input(event);
 		else
 		{
-			sf::Packet p;
-			dice->input(p);
+			sf::Uint32* data = (sf::Uint32*)malloc(sizeof(sf::Uint32));
+			std::size_t recived;
+			if (Client::Instance()->socket.receive(data, sizeof(Uint32), recived) == sf::Socket::Status::Done);
+			{
+				if (*data == 'DICE')
+				{
+					sf::Packet packet;
+					Client::Instance()->socket.receive(packet);
+					dice->input(packet);
+				}
+
+			}
+
 		}
-			
+
 
 		break;
 	default:

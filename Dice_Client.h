@@ -28,4 +28,3 @@ public:
 private:
 	Dice_Client();
 };
-#pragma once

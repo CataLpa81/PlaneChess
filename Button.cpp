@@ -87,5 +87,38 @@ void btnLocalGame::OnPress()
 
 void btnLocalGame::OnRelese()
 {
-	GP = GameScence::GAME;
+	GP = GameScence::LOCALGAME;
+}
+
+
+void btnNetGame::OnRelese()
+{
+	GP = GameScence::NETGAME1;
+}
+
+
+void btnNetGame::OnPress()
+{
+	
+}
+
+
+void btnCreateGame::OnRelese()
+{
+
+}
+
+void btnCreateGame::OnPress()
+{
+
+}
+
+void btnJoinGame::OnPress()
+{
+
+}
+
+void btnJoinGame::OnRelese()
+{
+	
 }
