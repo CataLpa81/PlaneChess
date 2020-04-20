@@ -22,7 +22,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{CD26AFCD-9A6A-4859-A660-8802A3040B1A}</ProjectGuid>
     <RootNamespace>友尽飞行棋</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -41,7 +41,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -145,12 +145,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="animator.cpp" />
-    <ClCompile Include="BeginInterface.cpp" />
+    <ClCompile Include="InputBox.cpp" />
+    <ClCompile Include="Scence.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="ChessBoard.cpp" />
     <ClCompile Include="dice.cpp" />
     <ClCompile Include="Dice_Client.cpp" />
-    <ClCompile Include="Dice_Server.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -164,7 +164,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animator.h" />
-    <ClInclude Include="BeginInterface.h" />
+    <ClInclude Include="InputBox.h" />
+    <ClInclude Include="Scence.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="ChessBoard.h" />
     <ClInclude Include="Dice.h" />

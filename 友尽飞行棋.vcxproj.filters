@@ -39,9 +39,6 @@
     <ClCompile Include="dice.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="BeginInterface.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Button.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -60,10 +57,13 @@
     <ClCompile Include="Plane_Client.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Dice_Server.cpp">
+    <ClCompile Include="Dice_Client.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Dice_Client.cpp">
+    <ClCompile Include="Scence.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="InputBox.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -89,9 +89,6 @@
     <ClInclude Include="Dice.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="BeginInterface.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -111,6 +108,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Dice_Client.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Scence.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="InputBox.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

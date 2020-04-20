@@ -8,6 +8,7 @@ extern sf::RenderWindow window;
 class Button
 {
 public:
+	Button(sf::String s);
 	virtual void OnPress() {};
 	virtual void OnRelese() {};
 	virtual void OnMove() {};
@@ -38,7 +39,7 @@ protected:
 class btnLocalGame :public Button
 {
 public:
-	btnLocalGame();
+	btnLocalGame():Button("./data/UI/btn_localgame.png"){}
 	virtual ~btnLocalGame() {};
 	virtual void OnPress();
 	virtual void OnRelese();
@@ -47,7 +48,7 @@ public:
 class btnNetGame :public Button
 {
 public:
-	btnNetGame();
+	btnNetGame() :Button("./data/UI/btn_netgame.png"){}
 	virtual ~btnNetGame() {};
 	virtual void OnPress();
 	virtual void OnRelese();
@@ -57,7 +58,7 @@ public:
 class btnCreateGame :public Button
 {
 public:
-	btnCreateGame();
+	btnCreateGame() :Button("./data/UI/btn_creategame.png") {}
 	virtual ~btnCreateGame() {};
 	virtual void OnPress();
 	virtual void OnRelese();
@@ -67,8 +68,18 @@ public:
 class btnJoinGame :public Button
 {
 public:
-	btnJoinGame();
+	btnJoinGame() :Button("./data/UI/btn_joingame.png") {}
 	virtual ~btnJoinGame() {};
+	virtual void OnPress();
+	virtual void OnRelese();
+};
+
+
+class btnStartGame :public Button
+{
+public:
+	btnStartGame():Button("./data/UI/btn_startgame.png") {}
+	virtual ~btnStartGame() {};
 	virtual void OnPress();
 	virtual void OnRelese();
 };

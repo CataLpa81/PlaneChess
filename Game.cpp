@@ -31,11 +31,24 @@ void Game::Input()
 			window.close();
 		}
 
-		if (GP == GameScence::BEGIN)
-			bi->Input(event);
+		switch (GP)
+		{
+		case GameScence::BEGIN:bi->Input(event);
+			break;
+		case GameScence::LOCALGAME:gm->GameInputLogic(event);
+			break;
+		case GameScence::NETGAME1:NetGame1_Scence::Instance()->Input(event);
+			break;
+		case GameScence::NETGAME2:NetGame2_Scence::Instance()->Input(event);
+			break;
+		case GameScence::NETGAME3:
+			break;
+		case GameScence::NETGAME:
+			break;
+		default:
+			break;
+		}
 
-		if (GP == GameScence::LOCALGAME)
-			gm->GameInputLogic(event);
 
 		if (event.type == sf::Event::EventType::KeyPressed && event.key.code == sf::Keyboard::S)
 		{
@@ -65,11 +78,24 @@ void Game::Rander()
 	window.draw(spbk);
 	window.draw(ChessBoard::instance()->sprite);
 
-	if (GP == GameScence::BEGIN)
-		bi->Render();
+	switch (GP)
+	{
+	case GameScence::BEGIN:bi->Render();
+		break;
+	case GameScence::LOCALGAME:gm->GameRenderLogic();
+		break;
+	case GameScence::NETGAME1:NetGame1_Scence::Instance()->Render();
+		break;
+	case GameScence::NETGAME2:NetGame2_Scence::Instance()->Render();
+		break;
+	case GameScence::NETGAME3:
+		break;
+	case GameScence::NETGAME:
+		break;
+	default:
+		break;
+	}
 
-	if (GP == GameScence::LOCALGAME)
-		gm->GameRenderLogic();
 
 	window.display();
 }

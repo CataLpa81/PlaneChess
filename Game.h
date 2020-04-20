@@ -8,7 +8,7 @@
 #include"Plane.h"
 #include"GameManager.h"
 #include"Dice.h"
-#include"BeginInterface.h"
+#include"Scence.h"
 #include"NetWork_Client.h"
 #include"NetWork_Server.h"
 #define WIDTH 1200

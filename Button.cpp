@@ -1,10 +1,20 @@
 #include"Button.h"
 #include"Game.h"
+
+
 void Button::InitTexture()
 {
 	TV.x = texture.getSize().x / 3;
 	TV.y = texture.getSize().y;
 	setTexture(1);
+}
+
+Button::Button(sf::String s)
+{
+	this->texture.loadFromFile(s);
+	this->sprite.setTexture(texture);
+	InitTexture();
+	setOriginCenter();
 }
 
 void Button::setPosition(int x,int y)
@@ -72,13 +82,6 @@ void Button::setTexture(int frame)
 	this->sprite.setTextureRect(TRect);
 }
 
-btnLocalGame::btnLocalGame()
-{
-	this->texture.loadFromFile("./data/UI/btn_localgame.png");
-	this->sprite.setTexture(texture);
-	InitTexture();
-	setOriginCenter();
-}
 
 void btnLocalGame::OnPress()
 {
@@ -105,7 +108,7 @@ void btnNetGame::OnPress()
 
 void btnCreateGame::OnRelese()
 {
-
+	GP = GameScence::NETGAME2;
 }
 
 void btnCreateGame::OnPress()
@@ -120,5 +123,15 @@ void btnJoinGame::OnPress()
 
 void btnJoinGame::OnRelese()
 {
-	
+	GP == GameScence::NETGAME3;
+}
+
+void btnStartGame::OnRelese()
+{
+
+}
+
+void btnStartGame::OnPress()
+{
+
 }
