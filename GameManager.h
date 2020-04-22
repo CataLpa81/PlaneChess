@@ -8,19 +8,17 @@
 #include"Plane_Client.h"
 #include"Dice.h"
 #include"Dice_Client.h"
-#include"NetWork_Client.h"
-#include"NetWork_Server.h"
 
-extern class ChessBoard;
-extern class PlanePool;
-extern class Dice;
+
+extern class Plane_ClientPool;
+extern class Dice_Client;
 
 class GameManager:public Observer
 {
 public:
-	static GameManager* instance(Dice* dice_, PlanePool* planepool_, ChessBoard* chessboard)
+	static GameManager* instance()
 	{
-		static GameManager* instance = new GameManager(dice_,planepool_,chessboard);
+		static GameManager* instance = new GameManager();
 		return instance;
 	}
 	enum {
@@ -37,10 +35,10 @@ public:
 	void GameInputLogic(sf::Event event);
 	void GameRenderLogic();
 private:
-	GameManager(Dice* dice_,PlanePool* planepool_, ChessBoard* chessboard_){
-		chessboard = chessboard_;
-		dice = dice_;
-		planepool = planepool_;
+	GameManager(){
+		chessboard = ChessBoard::instance();
+		dice = Dice::instance();
+		planepool = PlanePool::instance();
 	}
 
 
@@ -50,9 +48,9 @@ private:
 class GameManagerClient :public Observer
 {
 public:
-	static GameManagerClient* instance(Dice_Client* dice_, Plane_ClientPool* planepool_, ChessBoard* chessboard)
+	static GameManagerClient* instance()
 	{
-		static GameManagerClient* instance = new GameManagerClient(dice_, planepool_, chessboard);
+		static GameManagerClient* instance = new GameManagerClient();
 		return instance;
 	}
 	enum {
@@ -75,11 +73,5 @@ public:
 	void GameInputLogic(sf::Event event);
 	void GameRenderLogic();
 private:
-	GameManagerClient(Dice_Client* dice_, Plane_ClientPool* planepool_, ChessBoard* chessboard_) {
-		chessboard = chessboard_;
-		dice = dice_;
-		planepool = planepool_;
-	}
-
-
+	GameManagerClient();
 };

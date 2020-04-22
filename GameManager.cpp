@@ -76,33 +76,15 @@ void GameManagerClient::GameInputLogic(sf::Event event)
 	case GameManagerClient::PLANE:
 		if (Player == planepool->TURN)
 			planepool->currentpool->Input(event, dice->Number);
-		else
-		{
-			sf::Uint32* data = (sf::Uint32*)malloc(sizeof(sf::Uint32));
-			std::size_t recived;
-
-			if (Client::Instance()->socket.receive(data, sizeof(Uint32), recived) == sf::Socket::Status::Done);
-			{
-				if (*data == 'PLNE')
-				{
-					sf::Packet packet;
-					Client::Instance()->socket.receive(packet);
-					planepool->currentpool->Input(packet, dice->Number);
-				}
-
-			}
-
-		}
-
 		break;
 	case GameManagerClient::BRIGE_TODICE:
 		if (dice->Number != 6)
 			planepool->SwitchToNextTurn();
-		if (planepool->currentpool->fine == true)
+		if (planepool->currentpool->fine == true||planepool->currentpool->playerName=="null")
 			planepool->SwitchToNextTurn();
-		if (planepool->currentpool->fine == true)
+		if (planepool->currentpool->fine == true || planepool->currentpool->playerName == "null")
 			planepool->SwitchToNextTurn();
-		if (planepool->currentpool->fine == true)
+		if (planepool->currentpool->fine == true || planepool->currentpool->playerName == "null")
 			planepool->SwitchToNextTurn();
 		turn = DICE;
 		break;
@@ -115,24 +97,6 @@ void GameManagerClient::GameInputLogic(sf::Event event)
 	case GameManagerClient::DICE:
 		if (Player == planepool->TURN)
 			dice->input(event);
-		else
-		{
-			sf::Uint32* data = (sf::Uint32*)malloc(sizeof(sf::Uint32));
-			std::size_t recived;
-			if (Client::Instance()->socket.receive(data, sizeof(Uint32), recived) == sf::Socket::Status::Done);
-			{
-				if (*data == 'DICE')
-				{
-					sf::Packet packet;
-					Client::Instance()->socket.receive(packet);
-					dice->input(packet);
-				}
-
-			}
-
-		}
-
-
 		break;
 	default:
 		break;
@@ -167,4 +131,12 @@ void GameManagerClient::onNotify(Entity* entity_, MVCEvent event)
 	default:
 		break;
 	}
+
+}
+
+GameManagerClient::GameManagerClient()
+{
+	chessboard = ChessBoard::instance();
+	dice = Dice_Client::instance();
+	planepool = Plane_ClientPool::instance();
 }

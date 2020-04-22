@@ -1,5 +1,4 @@
 #pragma once
-#pragma once
 #include<SFML/Audio.hpp>
 #include<SFML/Graphics.hpp>
 #include<SFML/Window.hpp>
@@ -125,6 +124,7 @@ public:
 	bool isInput;
 	Plane_Client* plane_Client[4];
 	int ready_num = 0;
+	sf::String playerName ="null";
 };
 
 class RedPlane_ClientPool :public Plane_ClientPoolUnit

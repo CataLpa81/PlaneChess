@@ -3,13 +3,13 @@
 
 GameScence GP;
 
-sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "CataLpa");
+sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "CataLpa",sf::Style::Close|sf::Style::Titlebar);
 
 void Game::Initial()
 {
 	GP = GameScence::BEGIN;
 	window.setFramerateLimit(30);
-	gm = GameManager::instance(Dice::instance(), PlanePool::instance(), ChessBoard::instance());
+	gm = GameManager::instance();
 	gm->dice->addObserver(gm);
 	gm->planepool->AddObserver(gm);
 	gm->planepool->AddObserver(gm->chessboard);

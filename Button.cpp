@@ -1,6 +1,6 @@
 #include"Button.h"
 #include"Game.h"
-
+#include<sstream>
 
 void Button::InitTexture()
 {
@@ -108,7 +108,7 @@ void btnNetGame::OnPress()
 
 void btnCreateGame::OnRelese()
 {
-	GP = GameScence::NETGAME2;
+	
 }
 
 void btnCreateGame::OnPress()
@@ -123,12 +123,30 @@ void btnJoinGame::OnPress()
 
 void btnJoinGame::OnRelese()
 {
-	GP == GameScence::NETGAME3;
+	
+	sf::String myName = NetGame1_Scence::Instance()->IB1.GetContent();
+	sf::String roomString = NetGame1_Scence::Instance()->IB2.GetContent();
+	sf::Uint16 roomNumber;
+	std::stringstream ss;
+	ss << (std::string)roomString;
+	ss >> roomNumber;
+	sf::Uint32 data = HELLO;
+	Client::Instance()->socket.send(&data, sizeof(sf::Uint32));
+	sf::Packet packet;
+	packet << roomNumber << myName;
+	Client::Instance()->socket.send(packet); 
+
+	GP = GameScence::NETGAME2;
+
 }
 
 void btnStartGame::OnRelese()
 {
-
+	if (GameManagerClient::instance()->Player == GameManagerClient::RED)
+	{
+		sf::Uint32 data = START;
+		Client::Instance()->socket.send(&data, sizeof(sf::Uint32));
+	}
 }
 
 void btnStartGame::OnPress()

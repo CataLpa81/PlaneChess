@@ -5,6 +5,7 @@
 #include"Plane_Client.h"
 #include"NetWork.h"
 
+
 class Client
 {
 public:
@@ -17,6 +18,12 @@ public:
 	sf::Packet packet;
 	sf::Clock clock;
 	void Run();
+	void processDICE(sf::Packet&);
+	void processPLANE(sf::Packet&);
+	void processHELLO(sf::Packet&);
+	void processSTART(sf::Packet&);
+	void processSETNUMBER(sf::Packet&);
+	void processSETNAME(sf::Packet&);
 private:
 	Client() {}
 };

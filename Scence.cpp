@@ -27,37 +27,28 @@ void BeginInterface::Input(Event event)
 }
 
 
-NetGame1_Scence::NetGame1_Scence()
-{
-	this->texture.loadFromFile("./data/UI/NetGame1_Scence.png");
-	this->sprite.setTexture(texture);
-	this->btnCG.setPosition(350, 700);
-	this->btnJG.setPosition(880, 700);
-}
-
-
-void NetGame1_Scence::Render()
-{
-	window.draw(this->sprite);
-	this->btnCG.Render();
-	this->btnJG.Render();
-}
-
-void NetGame1_Scence::Input(Event event)
-{
-	this->btnCG.Input(event);
-	this->btnJG.Input(event);
-	
-}
-
-
 NetGame2_Scence::NetGame2_Scence()
 {
 	this->texture.loadFromFile("./data/UI/NetGame2_Scence.png");
 	this->sprite.setTexture(texture);
-	this->btnSG.setPosition(600, 600);
-	this->IB1.SetPosition(600, 339);
-	this->IB2.SetPosition(600, 447);
+	this->btnSG.setPosition(250, 650);
+	tRED.loadFromFile("./data/UI/BIG_RED.png");
+	sRED.setTexture(tRED);
+	sRED.setOrigin(tRED.getSize().x / 2, tRED.getSize().y / 2);
+	tGREEN.loadFromFile("./data/UI/BIG_GREEN.png");
+	sGREEN.setTexture(tGREEN);
+	sGREEN.setOrigin(tGREEN.getSize().x / 2, tGREEN.getSize().y / 2);
+	tYELLOW.loadFromFile("./data/UI/BIG_YELLOW.png");
+	sYELLOW.setTexture(tYELLOW);
+	sYELLOW.setOrigin(tYELLOW.getSize().x / 2, tYELLOW.getSize().y / 2);
+	tBLUE.loadFromFile("./data/UI/BIG_BLUE.png");
+	sBLUE.setTexture(tBLUE);
+	sBLUE.setOrigin(tBLUE.getSize().x / 2, tBLUE.getSize().y / 2);
+
+	sRED.setPosition(1010, 178);
+	sGREEN.setPosition(701, 178);
+	sYELLOW.setPosition(1010, 556);
+	sBLUE.setPosition(701, 556);
 }
 
 
@@ -65,14 +56,45 @@ void NetGame2_Scence::Render()
 {
 	window.draw(this->sprite);
 	this->btnSG.Render();
-	this->IB1.Render();
-	this->IB2.Render();
-	
+	if (GameManagerClient::instance()->planepool->redPlane_Clientpool.playerName != "null")
+		window.draw(this->sRED);
+	if (GameManagerClient::instance()->planepool->greenPlane_Clientpool.playerName != "null")
+		window.draw(this->sGREEN);
+	if (GameManagerClient::instance()->planepool->bluePlane_Clientpool.playerName != "null")
+		window.draw(this->sBLUE);
+	if (GameManagerClient::instance()->planepool->yellowPlane_Clientpool.playerName != "null")
+		window.draw(this->sYELLOW);
 }
-
 void NetGame2_Scence::Input(Event event)
 {
 	this->btnSG.Input(event);
+	
+}
+
+
+NetGame1_Scence::NetGame1_Scence()
+{
+	this->texture.loadFromFile("./data/UI/NetGame1_Scence.png");
+	this->sprite.setTexture(texture);
+	this->btnJG.setPosition(600, 600);
+	this->IB1.SetPosition(600, 339);
+	this->IB2.SetPosition(600, 447);
+}
+
+
+void NetGame1_Scence::Render()
+{
+	window.draw(this->sprite);
+	this->btnJG.Render();
+	this->IB1.Render();
+	this->IB2.Render();
+	
+	
+}
+
+void NetGame1_Scence::Input(Event event)
+{
+	this->btnJG.Input(event);
 	this->IB1.Input(event);
 	this->IB2.Input(event);
 }

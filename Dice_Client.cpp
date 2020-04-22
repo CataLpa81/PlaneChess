@@ -13,7 +13,7 @@ int Dice_Client::createNumber()
 
 Dice_Client::Dice_Client()
 {
-	this->texture.loadFromFile("./data/Entity/Dice_Client.png");
+	this->texture.loadFromFile("./data/Entity/Dice.png");
 	this->sprite.setTexture(this->texture);
 	this->x = 50 + 300;
 	this->y = 100 + 300;

@@ -1,5 +1,8 @@
 #pragma once
 #include<SFML/Graphics.hpp>
+#include"InputBox.h"
+#include"NetWork_Client.h"
+#include"NetWork.h"
 
 using namespace sf;
 

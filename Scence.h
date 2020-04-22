@@ -40,13 +40,14 @@ public:
 
 	void Render();
 	void Input(Event event);
-
+	InputBox IB1;
+	InputBox IB2;
 private:
 	NetGame1_Scence();
 	Texture texture;
 	Sprite sprite;
-	btnCreateGame btnCG;
 	btnJoinGame btnJG;
+	
 };
 
 
@@ -63,10 +64,18 @@ public:
 	void Input(Event event);
 
 private:
-	NetGame2_Scence();
 	Texture texture;
 	Sprite sprite;
+	Texture tRED;
+	Sprite sRED;
+	Texture tGREEN;
+	Sprite sGREEN;
+	Texture tYELLOW;
+	Sprite sYELLOW;
+	Texture tBLUE;
+	Sprite sBLUE;
 	btnStartGame btnSG;
-	InputBox IB1;
-	InputBox IB2;
+
+	NetGame2_Scence();
+	
 };
