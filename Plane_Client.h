@@ -6,6 +6,7 @@
 #include"Entity.h"
 #include"NetWork_Client.h"
 #include"NetWork_Server.h"
+#include"InputBox.h"
 
 #define Plane_ClientInit(ps,pe,pfs,pfe,lff)\
 this->PPU=PPU_;\
@@ -184,6 +185,10 @@ public:
 	GreenPlane_ClientPool greenPlane_Clientpool;
 
 	Texture tturnsign;
+	Lable Lred;
+	Lable Lgreen;
+	Lable Lblue;
+	Lable Lyellow;
 	Sprite turnsign;
 
 	Clock clock;

@@ -321,16 +321,32 @@ void Plane_ClientPoolUnit::Input(sf::Packet& packet, int diceNumber)
 
 void Plane_ClientPool::Render()
 {
+	if(this->redPlane_Clientpool.playerName!="null")
+	Lred.Render();
+	if (this->greenPlane_Clientpool.playerName != "null")
+	Lgreen.Render();
+	if (this->bluePlane_Clientpool.playerName != "null")
+	Lblue.Render();
+	if (this->yellowPlane_Clientpool.playerName != "null")
+	Lyellow.Render();
+
+
 	redPlane_Clientpool.Render();
 	bluePlane_Clientpool.Render();
 	yellowPlane_Clientpool.Render();
 	greenPlane_Clientpool.Render();
 
+	
 	window.draw(turnsign);
 };
 
 void Plane_ClientPool::Update()
 {
+
+	Lred.SetContent(this->redPlane_Clientpool.playerName);
+	Lyellow.SetContent(this->yellowPlane_Clientpool.playerName);
+	Lblue.SetContent(this->bluePlane_Clientpool.playerName);
+	Lgreen.SetContent(this->greenPlane_Clientpool.playerName);
 	redPlane_Clientpool.Update();
 	bluePlane_Clientpool.Update();
 	yellowPlane_Clientpool.Update();
@@ -418,6 +434,19 @@ Plane_ClientPool::Plane_ClientPool()
 	turnsign.setTexture(tturnsign);
 	turnsign.setOrigin(25, 25);
 	SetTurnSignPos();
+
+	Lred.SetScale(0.7);
+	Lyellow.SetScale(0.7);
+	Lblue.SetScale(0.7);
+	Lgreen.SetScale(0.7);
+
+	
+
+	Lred.SetPosition(518+50, 15+100);
+	Lyellow.SetPosition(518+50, 585+100);
+	Lblue.SetPosition(81+50,585+100);
+	Lgreen.SetPosition(81+50, 15+100);
+	
 
 }
 

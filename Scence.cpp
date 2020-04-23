@@ -101,11 +101,14 @@ void NetGame2_Scence::Input(Event event)
 
 NetGame1_Scence::NetGame1_Scence()
 {
+	IB2 = new InputBox(4, 0x30, 0x39);
 	this->texture.loadFromFile("./data/UI/NetGame1_Scence.png");
 	this->sprite.setTexture(texture);
 	this->btnJG.setPosition(600, 600);
 	this->IB1.SetPosition(600, 339);
-	this->IB2.SetPosition(600, 447);
+	this->IB2->SetPosition(600, 447);
+
+
 }
 
 
@@ -114,7 +117,7 @@ void NetGame1_Scence::Render()
 	window.draw(this->sprite);
 	this->btnJG.Render();
 	this->IB1.Render();
-	this->IB2.Render();
+	this->IB2->Render();
 	
 	
 }
@@ -123,6 +126,6 @@ void NetGame1_Scence::Input(Event event)
 {
 	this->btnJG.Input(event);
 	this->IB1.Input(event);
-	this->IB2.Input(event);
+	this->IB2->Input(event);
 }
 

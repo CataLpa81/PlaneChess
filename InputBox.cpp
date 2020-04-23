@@ -1,5 +1,5 @@
 #include"InputBox.h"
-
+#include<iostream>
 
 extern sf::RenderWindow window;
 
@@ -58,32 +58,43 @@ void InputBox::Input(Event event)
 				{
 					if (type == FULL)
 					{
-						if (event.text.unicode != 8 && InputContent.getSize() < LengthMax)
-						{
-							InputContent += event.text.unicode;
-						}
-						else if (InputContent.getSize() > 0 && event.text.unicode == 8)
-						{
+						
+							if (event.text.unicode != 8 && InputContent.getSize() < LengthMax)
+							{
+								if (event.text.unicode >= InputRangeLower && event.text.unicode <= InputRangeUpper)
+								{
+									InputContent += event.text.unicode;
+								}
+							}
+							else if (InputContent.getSize() > 0 && event.text.unicode == 8)
+							{
 
-							sf::Uint32 s;
-							s = *(InputContent.end() - 1);
-							InputContent.erase(InputContent.getSize() - 1, 1);
-						}
-						text.setString(InputContent);
+								sf::Uint32 s;
+								s = *(InputContent.end() - 1);
+								InputContent.erase(InputContent.getSize() - 1, 1);
+							}
+							text.setString(InputContent);
+						
+						
 					}
 					else if (type == HALF && event.text.unicode <= 0x00FF)
 					{
-						if (event.text.unicode != 8 && InputContent.getSize() < LengthMax)
-						{
-							InputContent += event.text.unicode;
-						}
-						else if (InputContent.getSize() > 0 && event.text.unicode == 8)
-						{
-							sf::Uint32 s;
-							s = *(InputContent.end() - 1);
-							InputContent.erase(InputContent.getSize() - 1, 1);
-						}
-						text.setString(InputContent);
+						
+							if (event.text.unicode != 8 && InputContent.getSize() < LengthMax)
+							{
+								if (event.text.unicode >= InputRangeLower && event.text.unicode <= InputRangeUpper)
+								{
+									InputContent += event.text.unicode;
+								}
+							}
+							else if (InputContent.getSize() > 0 && event.text.unicode == 8)
+							{
+								sf::Uint32 s;
+								s = *(InputContent.end() - 1);
+								InputContent.erase(InputContent.getSize() - 1, 1);
+							}
+							text.setString(InputContent);
+						
 					}
 
 				}
@@ -95,6 +106,16 @@ void InputBox::Input(Event event)
 void InputBox::Render()
 {
 	window.draw(this->sprite);
+	text.setOrigin(text.getLocalBounds().width / 2,textSize/2);
+	if (InputContent.getSize() > 8);
+	{
+		
+		text.setCharacterSize(textSize-5);
+	}
+	if (InputContent.getSize() <= 8)
+	{
+		text.setCharacterSize(textSize);
+	}
 	window.draw(text);
 	if (isSelected&&InputContent.getSize()<1)
 	{
@@ -111,10 +132,10 @@ void InputBox::Render()
 void InputBox::SetPosition(int x, int y)
 {
 	this->sprite.setPosition(x, y);
-	this->text.setPosition(x - texture.getSize().x / 2, y - texture.getSize().y / 2);
+	this->text.setPosition(x, y);
 	this->hitbox = sprite.getGlobalBounds();
 
-	this->Signsprite.setPosition(x - texture.getSize().x / 2, y);
+	this->Signsprite.setPosition(x, y);
 
 }
 
@@ -128,7 +149,7 @@ sf::String InputBox::GetContent()
 void Lable::SetPosition(int x, int y)
 {
 	this->sprite.setPosition(x, y);
-	this->text.setPosition(x - texture.getSize().x / 2, y - texture.getSize().y / 2);
+	this->text.setPosition(x, y);
 
 }
 
@@ -147,5 +168,21 @@ void Lable::SetContent(sf::String s)
 void Lable::Render()
 {
 	window.draw(this->sprite);
+	text.setOrigin(text.getLocalBounds().width / 2, textSize/2);
+	if(InputContent.getSize() > 8);
+	{
+		text.setCharacterSize(textSize - 8);
+	}
+	if(InputContent.getSize()<=8)
+	{
+		text.setCharacterSize(textSize);
+	}
 	window.draw(text);
+}
+
+void Lable::SetScale(double s)
+{
+	this->sprite.setScale(s, s);
+	this->text.setScale(s, s);
+	
 }

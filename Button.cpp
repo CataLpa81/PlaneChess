@@ -125,7 +125,7 @@ void btnJoinGame::OnRelese()
 {
 	
 	sf::String myName = NetGame1_Scence::Instance()->IB1.GetContent();
-	sf::String roomString = NetGame1_Scence::Instance()->IB2.GetContent();
+	sf::String roomString = NetGame1_Scence::Instance()->IB2->GetContent();
 	sf::Uint16 roomNumber;
 	std::stringstream ss;
 	ss << (std::string)roomString;

@@ -41,7 +41,7 @@ public:
 	void Render();
 	void Input(Event event);
 	InputBox IB1;
-	InputBox IB2;
+	InputBox* IB2;
 private:
 	NetGame1_Scence();
 	Texture texture;
