@@ -34,7 +34,6 @@ void Plane_Client::Update()
 		setrotation();
 	}
 
-
 	this->sprite.setPosition(x, y);
 	hitbox = this->sprite.getGlobalBounds();
 }

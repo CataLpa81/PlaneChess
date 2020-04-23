@@ -44,7 +44,12 @@ void Dice_Client::input(sf::Event& event)
 			doDice_Client = false;
 			//给观察这发送消息，轮到飞机的操作时间
 			this->notify(this, MVCEvent::PLANETIME);
+
+			sf::Uint32 data = DICE;
+			Client::Instance()->socket.send(&data, sizeof(Uint32));
+
 			Packet packet;
+			packet << this->Number;
 			//把骰子的结果发送给服务端
 			Client::Instance()->socket.send(packet);
 		}
@@ -58,6 +63,7 @@ void Dice_Client::input(sf::Packet& packet)
 	//从服务端接受骰子的结果
 	packet >> this->Number;
 	doDice_Client = false;
+	std::cout << "number = " << this->Number << std::endl;
 	//给观察这发送消息，轮到飞机的操作时间
 	this->notify(this, MVCEvent::PLANETIME);
 }

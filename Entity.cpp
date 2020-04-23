@@ -1,9 +1,8 @@
 #include"Entity.h"
 #include"ChessBoard.h"
+#include"ChessBoard_Client.h"
 #include<fstream>
 #include<time.h>
-#include"Plane.h"
-#include"GameManager.h"
 
 
 

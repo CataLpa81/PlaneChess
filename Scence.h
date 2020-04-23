@@ -66,6 +66,8 @@ public:
 private:
 	Texture texture;
 	Sprite sprite;
+
+
 	Texture tRED;
 	Sprite sRED;
 	Texture tGREEN;
@@ -74,6 +76,11 @@ private:
 	Sprite sYELLOW;
 	Texture tBLUE;
 	Sprite sBLUE;
+
+	Lable Lred;
+	Lable Lgreen;
+	Lable Lyellow;
+	Lable Lblue;
 	btnStartGame btnSG;
 
 	NetGame2_Scence();

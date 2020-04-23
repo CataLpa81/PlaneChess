@@ -1,6 +1,7 @@
 #pragma once
 
 #include"ChessBoard.h"
+#include"ChessBoard_Client.h"
 #include<fstream>
 #include"Entity.h"
 #include"MVC.h"
@@ -59,7 +60,7 @@ public:
 		BRIGE_TODICE,
 		DICE
 	}turn = DICE;
-	ChessBoard* chessboard;
+
 	Dice_Client* dice;
 	Plane_ClientPool* planepool;
 	enum {

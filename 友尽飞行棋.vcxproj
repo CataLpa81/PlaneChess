@@ -145,6 +145,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="animator.cpp" />
+    <ClCompile Include="ChessBoard_Client.cpp" />
     <ClCompile Include="InputBox.cpp" />
     <ClCompile Include="Scence.cpp" />
     <ClCompile Include="Button.cpp" />
@@ -156,7 +157,7 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MVC.cpp" />
-    <ClCompile Include="NerWork_Client.cpp" />
+    <ClCompile Include="NetWork_Client.cpp" />
     <ClCompile Include="NetWork.cpp" />
     <ClCompile Include="NetWork_Server.cpp" />
     <ClCompile Include="Plane.cpp" />
@@ -164,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animator.h" />
+    <ClInclude Include="ChessBoard_Client.h" />
     <ClInclude Include="InputBox.h" />
     <ClInclude Include="Scence.h" />
     <ClInclude Include="Button.h" />

@@ -14,7 +14,9 @@ void Server::Run()
 		std::cout << "Get Client from " << client->getRemoteAddress() << std::endl;
 		Player* player = new Player();
 		player->socket = client;
+		std::cout << "player 1=" << player << std::endl;
 		std::thread* t = new std::thread(&Server::Receive, this, player);
+		std::cout << "player 1 belong to=" << player->belongTo << std::endl;
 	}
 
 
@@ -22,6 +24,7 @@ void Server::Run()
 
 void Server::Receive(Player* player)
 {
+	
 	TcpSocket* ts = player->socket;
 	while (1)
 	{
@@ -51,7 +54,6 @@ void Server::Receive(Player* player)
 			processEXIT(player);
 			break;
 		case START:
-			ts->receive(packet);
 			std::cout << "Server recived START" << std::endl;
 			processSTART(player);
 			break;
@@ -72,16 +74,17 @@ void Server::SendPPU(sf::TcpSocket* ts)
 void Server::processDICE(sf::Packet& packet, Player* player)
 {
 	sf::TcpSocket* ts = player->socket;
-	int dicenumber;
+	sf::Uint8 dicenumber;
 	packet >> dicenumber;
 
 	sf::Packet packet_;
 	packet_ << dicenumber;
+	std::cout << dicenumber<<std::endl;
 	for (Player* p:player->belongTo->Players)
 	{
 		if ( p->socket!= ts&&p->socket!=nullptr)
 		{
-			sf::Uint32 data = 'DICE';
+			sf::Uint32 data = CDICE;
 			p->socket->send(&data, sizeof(Uint32));
 			p->socket->send(packet);
 			std::cout << "Server Send DICE" << std::endl;
@@ -103,7 +106,7 @@ void Server::processPLANE(sf::Packet& packet, Player* player)
 	{
 		if (p->socket != ts&&p->socket!=nullptr)
 		{
-			sf::Uint32 data = 'PLNE';
+			sf::Uint32 data = CPLANE;
 			p->socket->send(&data, sizeof(Uint32));
 			p->socket->send(packet_);
 		}
@@ -113,6 +116,7 @@ void Server::processPLANE(sf::Packet& packet, Player* player)
 
 void Server::processHELLO(sf::Packet& packet, Player* player)
 {
+	std::cout << "player 2=" << player << std::endl;
 	bool isExist = false;
 
 	sf::TcpSocket* ts = player->socket;
@@ -122,63 +126,58 @@ void Server::processHELLO(sf::Packet& packet, Player* player)
 	player->roomNumber = RoomNumber;
 	player->name = name;
 
-	for (std::map<sf::Uint16, GameRoom>::iterator iter;
+	for (std::map<sf::Uint16, GameRoom*>::iterator iter = RoomSet.begin();
 		iter != RoomSet.end();++iter)
 	{
 		if (iter->first == RoomNumber)
 		{
-			iter->second.addPlayer(player);
+			iter->second->addPlayer(player);
 			isExist = true;
+			std::cout << "Join room" << std::endl;
 			break;
 		}
 	}
 	if (!isExist)
 	{
-		GameRoom room;
-		room.addPlayer(player);
-		RoomSet.insert(std::pair<sf::Uint16,GameRoom>(RoomNumber,room));
+		GameRoom* room=new GameRoom();
+		room->roomID = RoomNumber;
+		room->addPlayer(player);
+		RoomSet.insert(std::pair<sf::Uint16,GameRoom*>(RoomNumber,room));
 	}
 	
-	for (Player* p : player->belongTo->Players)
+
+	sf::Uint32 data = SETNUMBER;
+	player->socket->send(&data, sizeof(sf::Uint32));
+	sf::Packet _packet;
+	_packet << player->planeNumber;
+	player->socket->send(_packet);
+	sf::Uint32 data2 = SETNAME;
+	for (int i=0;i<4;i++)
 	{
-		if (p != nullptr)
+		if (player->belongTo->Players[i]->socket != nullptr)
 		{
-			sf::Uint32 data = SETNUMBER;
-			p->socket->send(&data, sizeof(sf::Uint32));
-			sf::Packet _packet;
-			_packet << player->planeNumber;
-			p->socket->send(_packet);
 
-
-			sf::Uint32 data2 = SETNAME;
-
-			p->socket->send(&data2, sizeof(sf::Uint32));
+			player->belongTo->Players[i]->socket->send(&data2, sizeof(sf::Uint32));
 			sf::Packet __packet;
-			for (Player* p : player->belongTo->Players)
+			for (int j=0;j<4;j++)
 			{
-				if (p != nullptr)
-				{
-					__packet << p->name;
-				}
-				else if (p == nullptr)
-				{
-					__packet << "null";
-				}
+				__packet << player->belongTo->Players[j]->name;
 			}
-			p->socket->send(__packet);
+			player->belongTo->Players[i]->socket->send(__packet);
 		}
 	}
+	std::cout << "player 2 belong to=" << player->belongTo << std::endl;
 
 }
 
 
 void Server::processEXIT(Player* player)
 {
-	player->belongTo->Players[player->planeNumber] = nullptr;
-	if (player->belongTo->Players[0] == nullptr&&
-		player->belongTo->Players[1] == nullptr&&
-		player->belongTo->Players[2] == nullptr&&
-		player->belongTo->Players[3] == nullptr)
+	player->belongTo->Players[player->planeNumber]->isFill=false;
+	if (player->belongTo->Players[0]->isFill == false&&
+		player->belongTo->Players[1]->isFill == false&&
+		player->belongTo->Players[2]->isFill == false&&
+		player->belongTo->Players[3]->isFill == false)
 	{
 		RoomSet.erase(player->belongTo->roomID);
 	}
@@ -188,14 +187,31 @@ void Server::processEXIT(Player* player)
 
 void Server::processSTART(Player* player)
 {
-	for (Player* p : player->belongTo->Players)
-	{
-		if (p != nullptr)
+	std::cout << "player 3=" << player << std::endl;
+	std::cout << "player 3 belong to=" << player->belongTo << std::endl;
+	sf::Uint32 start = CSTART;
+
+	if (player->belongTo->Players[0]->socket != nullptr)
 		{
-			sf::Uint32 data = START;
-			p->socket->send(&data, sizeof(sf::Uint32));
+			std::cout << "send start 1" << std::endl;
+			player->belongTo->Players[0]->socket->send(&start, sizeof(sf::Uint32));
 		}
-	}
+			
+
+	if (player->belongTo->Players[1]->socket != nullptr)
+		{
+		std::cout << "send start 2" << std::endl;
+		player->belongTo->Players[1]->socket->send(&start, sizeof(sf::Uint32));
+		}
+			
+
+		if (player->belongTo->Players[2]->socket!=nullptr)
+			player->belongTo->Players[2]->socket->send(&start, sizeof(sf::Uint32));
+
+		if (player->belongTo->Players[3]->socket!=nullptr)
+			player->belongTo->Players[3]->socket->send(&start, sizeof(sf::Uint32));
+	
+	player->belongTo->isStart = true;
 }
 
 void GameRoom::addPlayer(Player* player)
@@ -209,16 +225,18 @@ void GameRoom::addPlayer(Player* player)
 	
 	for (int i = 0;i < 4;i++)
 	{
-		if (Players[i]==nullptr)
+		if (!Players[i]->isFill)
 		{
 			player->belongTo = this;
 			player->planeNumber = i;
+			player->isFill = true;
 			Players[i] = player;
+			
 			break;
 		}
 	}
 
-	if (Players[0]!=nullptr&&Players[1] != nullptr&&Players[2] != nullptr&&Players[3] != nullptr)
+	if (Players[0]->isFill&&Players[1]->isFill&&Players[2]->isFill&&Players[3]->isFill)
 	{
 		isFull = true;
 	}
@@ -229,7 +247,7 @@ void GameRoom::addPlayer(Player* player)
 
 void Player :: init()
 {
-	this->name.clear();
+	this->name = "null";
 	this->roomNumber = NULL;
 	this->belongTo = nullptr;
 	this->planeNumber = NULL;

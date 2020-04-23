@@ -17,19 +17,15 @@ void Client::Run()
 		socket.receive(data, sizeof(sf::Uint32), recived);
 		switch (*data)
 		{
-		case DICE:
+		case CDICE:
 			socket.receive(packet);
 			processDICE(packet);
 			break;
-		case PLANE:
+		case CPLANE:
 			socket.receive(packet);
 			processPLANE(packet);
 			break;
-		case HELLO:
-			socket.receive(packet);
-			processHELLO(packet);
-			break;
-		case START:
+		case CSTART:
 			processSTART(packet);
 			break;
 		case SETNUMBER:
@@ -55,10 +51,6 @@ void Client::processPLANE(sf::Packet& packet)
 {
 	GameManagerClient::instance()->planepool->currentpool->Input(packet, 
 		GameManagerClient::instance()->dice->Number);
-}
-void Client::processHELLO(sf::Packet& packet)
-{
-	
 }
 
 void Client::processSTART(sf::Packet& packet)

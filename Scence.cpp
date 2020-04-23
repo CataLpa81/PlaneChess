@@ -49,6 +49,11 @@ NetGame2_Scence::NetGame2_Scence()
 	sGREEN.setPosition(701, 178);
 	sYELLOW.setPosition(1010, 556);
 	sBLUE.setPosition(701, 556);
+
+	Lgreen.SetPosition(701,335);
+	Lred.SetPosition(1010, 335);
+	Lyellow.SetPosition(1010, 712);
+	Lblue.SetPosition(701, 712);
 }
 
 
@@ -57,14 +62,36 @@ void NetGame2_Scence::Render()
 	window.draw(this->sprite);
 	this->btnSG.Render();
 	if (GameManagerClient::instance()->planepool->redPlane_Clientpool.playerName != "null")
+	{
 		window.draw(this->sRED);
+		Lred.SetContent(GameManagerClient::instance()->planepool->redPlane_Clientpool.playerName);
+		Lred.Render();
+	}
+		
 	if (GameManagerClient::instance()->planepool->greenPlane_Clientpool.playerName != "null")
+	{
 		window.draw(this->sGREEN);
+		Lgreen.SetContent(GameManagerClient::instance()->planepool->greenPlane_Clientpool.playerName);
+		Lgreen.Render();
+	}
+		
 	if (GameManagerClient::instance()->planepool->bluePlane_Clientpool.playerName != "null")
+	{
 		window.draw(this->sBLUE);
+		Lblue.SetContent(GameManagerClient::instance()->planepool->bluePlane_Clientpool.playerName);
+		Lblue.Render();
+	}
+		
 	if (GameManagerClient::instance()->planepool->yellowPlane_Clientpool.playerName != "null")
+	{
 		window.draw(this->sYELLOW);
+		Lyellow.SetContent(GameManagerClient::instance()->planepool->yellowPlane_Clientpool.playerName);
+		Lyellow.Render();
+	}
+		
 }
+
+
 void NetGame2_Scence::Input(Event event)
 {
 	this->btnSG.Input(event);

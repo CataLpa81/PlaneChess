@@ -4,6 +4,7 @@
 #include<SFML/Graphics.hpp>
 #include<SFML/Window.hpp>
 #include"ChessBoard.h"
+#include"ChessBoard_Client.h"
 #include"Entity.h"
 #include"Plane.h"
 #include"GameManager.h"
@@ -28,6 +29,7 @@ enum class GameScence
 
 extern GameScence GP;
 
+
 class Game
 {
 public:
@@ -46,7 +48,10 @@ public:
 	Sprite spbk;
 
 	GameManager* gm;
+	GameManagerClient* gmc;
 	BeginInterface* bi;
+	NetGame2_Scence* NS2;
+	NetGame1_Scence* NS1;
 
 	bool IsServer=false;
 	bool IsClient=false;

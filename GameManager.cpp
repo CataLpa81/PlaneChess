@@ -70,7 +70,7 @@ void GameManager::onNotify(Entity* entity_,MVCEvent event)
 
 void GameManagerClient::GameInputLogic(sf::Event event)
 {
-	Client::Instance()->socket.setBlocking(false);
+	
 	switch (turn)
 	{
 	case GameManagerClient::PLANE:
@@ -113,7 +113,7 @@ void GameManagerClient::GameUpdateLogic()
 
 void GameManagerClient::GameRenderLogic()
 {
-
+	
 	planepool->Render();
 	dice->Rander();
 }
@@ -136,7 +136,6 @@ void GameManagerClient::onNotify(Entity* entity_, MVCEvent event)
 
 GameManagerClient::GameManagerClient()
 {
-	chessboard = ChessBoard::instance();
 	dice = Dice_Client::instance();
 	planepool = Plane_ClientPool::instance();
 }

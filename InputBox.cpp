@@ -122,3 +122,30 @@ sf::String InputBox::GetContent()
 {
 	return this->InputContent;
 }
+
+
+
+void Lable::SetPosition(int x, int y)
+{
+	this->sprite.setPosition(x, y);
+	this->text.setPosition(x - texture.getSize().x / 2, y - texture.getSize().y / 2);
+
+}
+
+sf::String Lable::GetContent()
+{
+	return this->InputContent;
+	
+}
+
+void Lable::SetContent(sf::String s)
+{
+	this->InputContent = s;
+	this->text.setString(InputContent);
+}
+
+void Lable::Render()
+{
+	window.draw(this->sprite);
+	window.draw(text);
+}
