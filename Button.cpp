@@ -1,6 +1,8 @@
 #include"Button.h"
 #include"Game.h"
+
 #include<sstream>
+
 
 void Button::InitTexture()
 {
@@ -151,6 +153,17 @@ void btnStartGame::OnRelese()
 }
 
 void btnStartGame::OnPress()
+{
+
+}
+
+
+void btnBack::OnRelese()
+{
+	GP = GameScence::BEGIN;
+}
+
+void btnBack::OnPress()
 {
 
 }

@@ -9,10 +9,14 @@
 #include"Plane_Client.h"
 #include"Dice.h"
 #include"Dice_Client.h"
+#include"Button.h"
+
+
 
 
 extern class Plane_ClientPool;
 extern class Dice_Client;
+
 
 class GameManager:public Observer
 {
@@ -31,6 +35,7 @@ public:
 	ChessBoard* chessboard;
 	Dice* dice;
 	PlanePool* planepool;
+	btnBack btnB;
 	virtual void onNotify(Entity* entity_,MVCEvent event);
 	void GameUpdateLogic();
 	void GameInputLogic(sf::Event event);
@@ -40,6 +45,7 @@ private:
 		chessboard = ChessBoard::instance();
 		dice = Dice::instance();
 		planepool = PlanePool::instance();
+		btnB.setPosition(100, 50);
 	}
 
 

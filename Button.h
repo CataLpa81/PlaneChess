@@ -1,8 +1,7 @@
 #pragma once
 #include<SFML/Graphics.hpp>
 #include"InputBox.h"
-#include"NetWork_Client.h"
-#include"NetWork.h"
+
 
 using namespace sf;
 
@@ -83,6 +82,15 @@ class btnStartGame :public Button
 public:
 	btnStartGame():Button("./data/UI/btn_startgame.png") {}
 	virtual ~btnStartGame() {};
+	virtual void OnPress();
+	virtual void OnRelese();
+};
+
+class btnBack :public Button
+{
+public:
+	btnBack() :Button("./data/UI/btn_back.png") {}
+	virtual ~btnBack() {};
 	virtual void OnPress();
 	virtual void OnRelese();
 };

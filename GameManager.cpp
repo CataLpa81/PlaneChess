@@ -34,6 +34,8 @@ void GameManager::GameInputLogic(sf::Event event)
 		break;
 	}
 
+	btnB.Input(event);
+
 }
 
 void GameManager::GameUpdateLogic()
@@ -45,7 +47,7 @@ void GameManager::GameUpdateLogic()
 
 void GameManager::GameRenderLogic()
 {
-
+	btnB.Render();
 	planepool->Render();
 	dice->Rander();
 }

@@ -31,7 +31,8 @@ void Server::Receive(Player* player)
 		sf::Packet packet;
 		sf::Uint32* data = (sf::Uint32*)malloc(sizeof(sf::Uint32));
 		std::size_t recived;
-		ts->receive(data, sizeof(sf::Uint32), recived);
+		sf::Socket::Status status = ts->receive(data, sizeof(sf::Uint32), recived);
+		if(status==sf::Socket::Status::Done)
 		switch (*data)
 		{
 		case DICE:
@@ -59,6 +60,11 @@ void Server::Receive(Player* player)
 			break;
 
 		default:
+			break;
+		}
+		else if (status == sf::Socket::Status::Disconnected)
+		{
+			processEXIT(player);
 			break;
 		}
 		
@@ -173,6 +179,23 @@ void Server::processHELLO(sf::Packet& packet, Player* player)
 
 void Server::processEXIT(Player* player)
 {
+	player->name = "null";
+	sf::Uint32 data2 = SETNAME;
+	for (int i = 0;i < 4;i++)
+	{
+		if (player->belongTo->Players[i]->socket != nullptr)
+		{
+
+			player->belongTo->Players[i]->socket->send(&data2, sizeof(sf::Uint32));
+			sf::Packet __packet;
+			for (int j = 0;j < 4;j++)
+			{
+				__packet << player->belongTo->Players[j]->name;
+			}
+			player->belongTo->Players[i]->socket->send(__packet);
+		}
+	}
+
 	player->belongTo->Players[player->planeNumber]->isFill=false;
 	if (player->belongTo->Players[0]->isFill == false&&
 		player->belongTo->Players[1]->isFill == false&&
@@ -181,8 +204,10 @@ void Server::processEXIT(Player* player)
 	{
 		RoomSet.erase(player->belongTo->roomID);
 	}
-	player->init();
-	
+	player->belongTo->Players[player->planeNumber] = new Player();
+	delete player->socket;
+	delete player;
+
 }
 
 void Server::processSTART(Player* player)
@@ -191,18 +216,12 @@ void Server::processSTART(Player* player)
 	std::cout << "player 3 belong to=" << player->belongTo << std::endl;
 	sf::Uint32 start = CSTART;
 
-	if (player->belongTo->Players[0]->socket != nullptr)
-		{
-			std::cout << "send start 1" << std::endl;
+		if (player->belongTo->Players[0]->socket != nullptr)
 			player->belongTo->Players[0]->socket->send(&start, sizeof(sf::Uint32));
-		}
 			
 
-	if (player->belongTo->Players[1]->socket != nullptr)
-		{
-		std::cout << "send start 2" << std::endl;
-		player->belongTo->Players[1]->socket->send(&start, sizeof(sf::Uint32));
-		}
+		if (player->belongTo->Players[1]->socket != nullptr)
+			player->belongTo->Players[1]->socket->send(&start, sizeof(sf::Uint32));
 			
 
 		if (player->belongTo->Players[2]->socket!=nullptr)
@@ -230,6 +249,7 @@ void GameRoom::addPlayer(Player* player)
 			player->belongTo = this;
 			player->planeNumber = i;
 			player->isFill = true;
+			delete Players[i];
 			Players[i] = player;
 			
 			break;

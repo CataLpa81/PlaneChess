@@ -2,6 +2,7 @@
 #include<SFML/Graphics.hpp>
 #include"Button.h"
 #include"InputBox.h"
+
 #include<stack>
 using namespace sf;
 
@@ -47,6 +48,7 @@ private:
 	Texture texture;
 	Sprite sprite;
 	btnJoinGame btnJG;
+	btnBack btnB;
 	
 };
 
@@ -82,6 +84,7 @@ private:
 	Lable Lyellow;
 	Lable Lblue;
 	btnStartGame btnSG;
+	
 
 	NetGame2_Scence();
 	
