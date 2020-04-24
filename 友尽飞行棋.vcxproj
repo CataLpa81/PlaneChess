@@ -145,6 +145,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="animator.cpp" />
+    <ClCompile Include="ChatRoom.cpp" />
     <ClCompile Include="ChessBoard_Client.cpp" />
     <ClCompile Include="InputBox.cpp" />
     <ClCompile Include="Scence.cpp" />
@@ -165,6 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animator.h" />
+    <ClInclude Include="ChatRoom.h" />
     <ClInclude Include="ChessBoard_Client.h" />
     <ClInclude Include="InputBox.h" />
     <ClInclude Include="Scence.h" />

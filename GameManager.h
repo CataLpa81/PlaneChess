@@ -10,6 +10,7 @@
 #include"Dice.h"
 #include"Dice_Client.h"
 #include"Button.h"
+#include"ChatRoom.h"
 
 
 
@@ -79,6 +80,9 @@ public:
 	void GameUpdateLogic();
 	void GameInputLogic(sf::Event event);
 	void GameRenderLogic();
+
+	ChatRoom* CR;
+	
 private:
 	GameManagerClient();
 };

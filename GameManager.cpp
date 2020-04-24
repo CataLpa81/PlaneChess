@@ -72,7 +72,7 @@ void GameManager::onNotify(Entity* entity_,MVCEvent event)
 
 void GameManagerClient::GameInputLogic(sf::Event event)
 {
-	
+	this->CR->Input(event);
 	switch (turn)
 	{
 	case GameManagerClient::PLANE:
@@ -118,6 +118,7 @@ void GameManagerClient::GameRenderLogic()
 	
 	planepool->Render();
 	dice->Rander();
+	CR->Render();
 }
 
 void GameManagerClient::onNotify(Entity* entity_, MVCEvent event)
@@ -138,6 +139,10 @@ void GameManagerClient::onNotify(Entity* entity_, MVCEvent event)
 
 GameManagerClient::GameManagerClient()
 {
+	
+	CR = ChatRoom::Instance();
 	dice = Dice_Client::instance();
 	planepool = Plane_ClientPool::instance();
+
+	CR->setPosition(700, 0);
 }

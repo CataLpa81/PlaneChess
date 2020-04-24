@@ -1,7 +1,7 @@
 #include"NetWork_Client.h"
 #include"Game.h"
 
-
+extern sf::Mutex mutex;
 
 void Client::Run()
 {
@@ -35,6 +35,10 @@ void Client::Run()
 		case SETNAME:
 			socket.receive(packet);
 			processSETNAME(packet);
+			break;
+		case CCHAT:
+			socket.receive(packet);
+			processCCHAT(packet);
 			break;
 		default:
 			break;
@@ -95,4 +99,13 @@ void Client::processSETNAME(sf::Packet& packet)
 	GameManagerClient::instance()->planepool->yellowPlane_Clientpool.playerName = YELLOWname;
 	GameManagerClient::instance()->planepool->bluePlane_Clientpool.playerName = BLUEname;
 	GameManagerClient::instance()->planepool->greenPlane_Clientpool.playerName = GREENname;
+}
+
+void Client::processCCHAT(sf::Packet& packet)
+{
+	sf::String s;
+	packet >> s;
+	mutex.lock();
+	ChatRoom::Instance()->addContent(s);
+	mutex.unlock();
 }

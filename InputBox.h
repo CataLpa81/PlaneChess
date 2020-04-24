@@ -76,16 +76,16 @@ public:
 			type = FULL;
 		
 	}
-	void SetPosition(int x, int y);
+	virtual void SetPosition(int x, int y);
 	sf::String GetContent();
 	void Input(Event);
-	void Render();
+	virtual void Render();
 	enum {
 		HALF,
 		FULL,
 	}type = FULL;
 
-private:
+protected:
 	bool isSelected = false;
 	bool isDisplaySign = false;
 	int LengthMax = 12;
@@ -105,5 +105,53 @@ private:
 
 	int InputRangeLower=0x00000;
 	int InputRangeUpper=0xFFFFF;
+
+};
+
+class ChatInputBox 
+{
+public:
+
+	ChatInputBox()
+	{
+		this->texture.loadFromFile("./data/UI/ChatInput.png");
+		this->sprite.setTexture(this->texture);
+		this->sprite.setOrigin(0,0);
+
+		this->Signtexture.loadFromFile("./data/UI/InputSign.png");
+		this->Signsprite.setTexture(this->Signtexture);
+		this->Signsprite.setOrigin(Signtexture.getSize().x / 2, 0);
+
+		font1.loadFromFile("./data/Fonts/qingyuan.ttc");
+		this->text.setCharacterSize(textSize);
+		this->text.setFont(font1);
+		this->text.setFillColor(Color(0, 0, 0, 255));
+	}
+
+	
+	virtual void SetPosition(int x, int y);
+	sf::String GetContent();
+	void Input(Event);
+	void Render();
+	void Clear();
+
+protected:
+	bool isSelected = false;
+	bool isDisplaySign = false;
+	int LengthMax = 140;
+	int textSize = 15;
+	bool isCursorOut = true;
+
+	sf::Clock clock;
+	sf::Cursor cursor;
+	sf::FloatRect hitbox;
+	Sprite sprite;
+	Texture texture;
+	Sprite Signsprite;
+	Texture Signtexture;
+	sf::String InputContent;
+	sf::String InputContentTrans;
+	sf::Font font1;
+	sf::Text text;
 
 };

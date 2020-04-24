@@ -94,3 +94,12 @@ public:
 	virtual void OnPress();
 	virtual void OnRelese();
 };
+
+class btnSend :public Button
+{
+public:
+	btnSend() :Button("./data/UI/btn_send.png") {}
+	virtual ~btnSend() {};
+	virtual void OnPress();
+	virtual void OnRelese();
+};

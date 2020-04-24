@@ -24,6 +24,7 @@ public:
 	void processSTART(sf::Packet&);
 	void processSETNUMBER(sf::Packet&);
 	void processSETNAME(sf::Packet&);
+	void processCCHAT(sf::Packet&);
 private:
 	Client() {}
 };

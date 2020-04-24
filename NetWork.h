@@ -18,3 +18,6 @@ static const sf::Uint32 START = 'STRT';
 static const sf::Uint32 CSTART = 'CSTR';
 static const sf::Uint32 SETNUMBER = 'SNUM';
 static const sf::Uint32 SETNAME = 'SNAM';
+
+static const sf::Uint32 CHAT = 'CHAT';
+static const sf::Uint32 CCHAT = 'CCHA';

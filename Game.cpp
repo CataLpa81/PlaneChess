@@ -3,6 +3,7 @@
 
 GameScence GP;
 
+sf::Mutex mutex;
 sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "CataLpa",sf::Style::Close|sf::Style::Titlebar);
 
 void Game::Initial()

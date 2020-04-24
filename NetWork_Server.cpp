@@ -50,15 +50,15 @@ void Server::Receive(Player* player)
 			std::cout << "Server recived HELLO" << std::endl;
 			processHELLO(packet, player);
 			break;
-		case EXIT:
-			std::cout << "Server recived EXIT" << std::endl;
-			processEXIT(player);
-			break;
 		case START:
 			std::cout << "Server recived START" << std::endl;
 			processSTART(player);
 			break;
-
+		case CHAT:
+			ts->receive(packet);
+			std::cout << "Server recived CHAT" << std::endl;
+			processCHAT(packet,player);
+			break;
 		default:
 			break;
 		}
@@ -231,6 +231,28 @@ void Server::processSTART(Player* player)
 			player->belongTo->Players[3]->socket->send(&start, sizeof(sf::Uint32));
 	
 	player->belongTo->isStart = true;
+}
+
+
+void Server::processCHAT(sf::Packet& packet, Player* player)
+{
+	sf::String s;
+	packet >> s;
+	sf::String s2 = player->name +":"+s;
+
+	sf::Packet _packet;
+	sf::Uint32 data = CCHAT;
+	_packet << s2;
+	
+	for (Player* p : player->belongTo->Players)
+	{
+		if (p->socket != nullptr)
+		{
+			p->socket->send(&data, sizeof(sf::Uint32));
+			p->socket->send(_packet);
+		}
+			
+	}
 }
 
 void GameRoom::addPlayer(Player* player)

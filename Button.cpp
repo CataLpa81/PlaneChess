@@ -167,3 +167,21 @@ void btnBack::OnPress()
 {
 
 }
+
+void btnSend::OnPress()
+{
+
+}
+
+void btnSend::OnRelese()
+{
+	sf::String s1 = ChatRoom::Instance()->Inputbox.GetContent();
+	sf::Uint32 data = CHAT;
+	Client::Instance()->socket.send(&data, sizeof(sf::Uint32));
+	sf::Packet packet;
+	packet << s1;
+	Client::Instance()->socket.send(packet);
+	ChatRoom::Instance()->Inputbox.Clear();
+
+	
+}

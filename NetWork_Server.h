@@ -32,6 +32,7 @@ public:
 	void processHELLO(sf::Packet&, Player* player);
 	void processEXIT(Player* player);
 	void processSTART(Player* player);
+	void processCHAT(sf::Packet&, Player* player);
 	
 private:
 	Server() {}
