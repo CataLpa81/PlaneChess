@@ -27,6 +27,7 @@ public:
 	void processCCHAT(sf::Packet&);
 	void processJOIN();
 	void processFULL();
+	void processSTARTED();
 private:
 	Client() {}
 };

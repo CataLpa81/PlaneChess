@@ -46,6 +46,9 @@ void Client::Run()
 		case JOIN:
 			processJOIN();
 			break;
+		case STARTED:
+			processSTARTED();
+			break;
 		default:
 			break;
 		}
@@ -124,5 +127,10 @@ void Client::processFULL()
 void Client::processJOIN()
 {
 	GP = GameScence::NETGAME2;
+}
+
+void Client::processSTARTED()
+{
+	NetGame1_Scence::Instance()->DisPlaySTARTED();
 }
 

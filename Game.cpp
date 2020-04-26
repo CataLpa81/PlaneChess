@@ -112,5 +112,11 @@ void Game::Run()
 		Update();
 		Rander();
 	}
+
+	if (!window.isOpen())
+	{
+		sf::Uint32 exit = EXIT;
+		Client::Instance()->socket.send(&exit, sizeof(sf::Uint32));
+	}
 	
 }

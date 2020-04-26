@@ -5,34 +5,38 @@
 
 void GameManager::GameInputLogic(sf::Event event)
 {
-	switch (turn)
+	for (int i = 0;i < 3;i++)
 	{
-	case GameManager::PLANE:
-		planepool->Input(event,dice->Number);
-		break;
-	case GameManager::BRIGE_TODICE:
-		if(dice->Number!=6)
-		planepool->SwitchToNextTurn();
-		if(planepool->currentpool->fine==true)
-			planepool->SwitchToNextTurn();
-		if (planepool->currentpool->fine == true)
-			planepool->SwitchToNextTurn();
-		if (planepool->currentpool->fine == true)
-			planepool->SwitchToNextTurn();
-		turn = DICE;
-		break;
-	case GameManager::BRIGE_TOPLANE:
-		if (this->planepool->currentpool->JudgeAvailable(dice->Number))
-			turn = PLANE;
-		else
-			turn = BRIGE_TODICE;
-		break;
-	case GameManager::DICE:
-		dice->input(event);
-		break;
-	default:
-		break;
+		switch (turn)
+		{
+		case GameManager::PLANE:
+			planepool->Input(event, dice->Number);
+			break;
+		case GameManager::BRIGE_TODICE:
+			if (dice->Number != 6)
+				planepool->SwitchToNextTurn();
+			if (planepool->currentpool->fine == true)
+				planepool->SwitchToNextTurn();
+			if (planepool->currentpool->fine == true)
+				planepool->SwitchToNextTurn();
+			if (planepool->currentpool->fine == true)
+				planepool->SwitchToNextTurn();
+			turn = DICE;
+			break;
+		case GameManager::BRIGE_TOPLANE:
+			if (this->planepool->currentpool->JudgeAvailable(dice->Number))
+				turn = PLANE;
+			else
+				turn = BRIGE_TODICE;
+			break;
+		case GameManager::DICE:
+			dice->input(event);
+			break;
+		default:
+			break;
+		}
 	}
+	
 
 	btnB.Input(event);
 
@@ -74,36 +78,40 @@ void GameManager::onNotify(Entity* entity_,MVCEvent event)
 void GameManagerClient::GameInputLogic(sf::Event event)
 {
 	this->CR->Input(event);
-	switch (turn)
+	for (int i = 0;i < 3;i++)
 	{
-	case GameManagerClient::PLANE:
-		if (Player == planepool->TURN)
-			planepool->currentpool->Input(event, dice->Number);
-		break;
-	case GameManagerClient::BRIGE_TODICE:
-		if (dice->Number != 6)
-			planepool->SwitchToNextTurn();
-		if (planepool->currentpool->fine == true||planepool->currentpool->playerName=="null")
-			planepool->SwitchToNextTurn();
-		if (planepool->currentpool->fine == true || planepool->currentpool->playerName == "null")
-			planepool->SwitchToNextTurn();
-		if (planepool->currentpool->fine == true || planepool->currentpool->playerName == "null")
-			planepool->SwitchToNextTurn();
-		turn = DICE;
-		break;
-	case GameManagerClient::BRIGE_TOPLANE:
-		if (this->planepool->currentpool->JudgeAvailable(dice->Number))
-			turn = PLANE;
-		else
-			turn = BRIGE_TODICE;
-		break;
-	case GameManagerClient::DICE:
-		if (Player == planepool->TURN)
-			dice->input(event);
-		break;
-	default:
-		break;
+		switch (turn)
+		{
+		case GameManagerClient::PLANE:
+			if (Player == planepool->TURN)
+				planepool->currentpool->Input(event, dice->Number);
+			break;
+		case GameManagerClient::BRIGE_TODICE:
+			if (dice->Number != 6)
+				planepool->SwitchToNextTurn();
+			if (planepool->currentpool->fine == true || planepool->currentpool->playerName == "null")
+				planepool->SwitchToNextTurn();
+			if (planepool->currentpool->fine == true || planepool->currentpool->playerName == "null")
+				planepool->SwitchToNextTurn();
+			if (planepool->currentpool->fine == true || planepool->currentpool->playerName == "null")
+				planepool->SwitchToNextTurn();
+			turn = DICE;
+			break;
+		case GameManagerClient::BRIGE_TOPLANE:
+			if (this->planepool->currentpool->JudgeAvailable(dice->Number))
+				turn = PLANE;
+			else
+				turn = BRIGE_TODICE;
+			break;
+		case GameManagerClient::DICE:
+			if (Player == planepool->TURN)
+				dice->input(event);
+			break;
+		default:
+			break;
+		}
 	}
+	
 
 }
 

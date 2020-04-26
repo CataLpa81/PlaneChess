@@ -119,6 +119,15 @@ NetGame1_Scence::NetGame1_Scence()
 	Color c(0, 0, 0,255);
 	t.setFillColor(c);
 
+	f1.loadFromFile("./data/Fonts/qingyuan.ttc");
+	t1.setFont(f1);
+	t1.setCharacterSize(50);
+	t1.setString(L"游戏已经开始");
+	t1.setOrigin(t1.getLocalBounds().width / 2, t1.getLocalBounds().height / 2);
+	t1.setPosition(600, 700);
+
+	t1.setFillColor(c);
+
 }
 
 
@@ -133,9 +142,15 @@ void NetGame1_Scence::Render()
 
 	if (isFull)
 		window.draw(t);
+	if (isStart)
+		window.draw(t1);
 
 	if (c.getElapsedTime().asSeconds() > 3)
+	{
 		isFull = false;
+		isStart = false;
+	}
+		
 	
 }
 
@@ -150,6 +165,13 @@ void NetGame1_Scence::Input(Event event)
 void NetGame1_Scence::DisPlayFULL()
 {
 	isFull = true;
+	c.restart();
+
+}
+
+void NetGame1_Scence::DisPlaySTARTED()
+{
+	isStart = true;
 	c.restart();
 
 }

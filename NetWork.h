@@ -23,3 +23,5 @@ static const sf::Uint32 CHAT = 'CHAT';
 static const sf::Uint32 CCHAT = 'CCHA';
 
 static const sf::Uint32 JOIN = 'JOIN';
+
+static const sf::Uint32 STARTED = 'STED';
