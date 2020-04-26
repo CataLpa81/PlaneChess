@@ -40,6 +40,7 @@ void GameManager::GameInputLogic(sf::Event event)
 
 void GameManager::GameUpdateLogic()
 {
+	int fineCount = 0;
 	planepool->Update();
 	//chessboard->Update();
 	dice->Update();

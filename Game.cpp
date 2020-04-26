@@ -31,6 +31,9 @@ void Game::Initial()
 	gmc->dice->addObserver(gmc);
 	gmc->planepool->AddObserver(gmc);
 	gmc->planepool->AddObserver(ChessBoard_Client::instance());
+
+	static std::thread t2(&Client::Run, c);
+	IsClient = true;
 }
 
 
@@ -60,22 +63,7 @@ void Game::Input()
 		default:
 			break;
 		}
-
-
-		if (event.type == sf::Event::EventType::KeyPressed && event.key.code == sf::Keyboard::S)
-		{
-			static std::thread t1(&Server::Run,s);
-			IsServer = true;
-		}
-
-		if (event.type == sf::Event::EventType::KeyPressed && event.key.code == sf::Keyboard::C)
-		{
-			static std::thread t2(&Client::Run,c);
-			IsClient = true;
-		}
 	}
-
-
 }
 
 void Game::Update()
@@ -117,11 +105,12 @@ void Game::Rander()
 void Game::Run()
 {
 	Initial();
-	while (1)
+	while (window.isOpen())
 	{
 
 		Input();
 		Update();
 		Rander();
 	}
+	
 }

@@ -1,4 +1,5 @@
 #include"InputBox.h"
+#include"NetWork.h"
 #include<iostream>
 
 extern sf::RenderWindow window;
@@ -98,6 +99,8 @@ void InputBox::Input(Event event)
 					}
 
 				}
+				
+				
 			}
 		}
 	
@@ -219,6 +222,16 @@ void ChatInputBox::Input(Event event)
 					InputContent.insert(InputContent.getSize() - 1, '\n' );
 				}
 				text.setString(InputContent);
+			}
+			if (event.type == sf::Event::EventType::KeyPressed && event.key.code == sf::Keyboard::Enter)
+			{
+				sf::String s1 = GetContent();
+				sf::Uint32 data = CHAT;
+				Client::Instance()->socket.send(&data, sizeof(sf::Uint32));
+				sf::Packet packet;
+				packet << s1;
+				Client::Instance()->socket.send(packet);
+				this->Clear();
 			}
 		}
 	}

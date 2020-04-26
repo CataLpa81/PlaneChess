@@ -110,6 +110,14 @@ NetGame1_Scence::NetGame1_Scence()
 	this->IB1.SetPosition(600, 339);
 	this->IB2->SetPosition(600, 447);
 
+	f.loadFromFile("./data/Fonts/qingyuan.ttc");
+	t.setFont(f);
+	t.setCharacterSize(50);
+	t.setString(L"·¿¼äÒÑÂú");
+	t.setOrigin(t.getLocalBounds().width / 2, t.getLocalBounds().height / 2);
+	t.setPosition(600, 700);
+	Color c(0, 0, 0,255);
+	t.setFillColor(c);
 
 }
 
@@ -121,7 +129,13 @@ void NetGame1_Scence::Render()
 	this->btnB.Render();
 	this->IB1.Render();
 	this->IB2->Render();
-	
+
+
+	if (isFull)
+		window.draw(t);
+
+	if (c.getElapsedTime().asSeconds() > 3)
+		isFull = false;
 	
 }
 
@@ -131,5 +145,12 @@ void NetGame1_Scence::Input(Event event)
 	this->btnJG.Input(event);
 	this->IB1.Input(event);
 	this->IB2->Input(event);
+}
+
+void NetGame1_Scence::DisPlayFULL()
+{
+	isFull = true;
+	c.restart();
+
 }
 

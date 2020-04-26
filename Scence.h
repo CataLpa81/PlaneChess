@@ -41,14 +41,20 @@ public:
 
 	void Render();
 	void Input(Event event);
+	void DisPlayFULL();
+
 	InputBox IB1;
 	InputBox* IB2;
 private:
 	NetGame1_Scence();
+	Text t;
+	Font f;
 	Texture texture;
 	Sprite sprite;
 	btnJoinGame btnJG;
 	btnBack btnB;
+	bool isFull=false;
+	Clock c;
 	
 };
 

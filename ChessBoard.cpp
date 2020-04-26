@@ -18,7 +18,7 @@ void ChessBoard::getdata()
 	for (int i = 0;i < 76;i++)
 	{
 		infile >> a;
-		std::cout << a << " ";
+		//std::cout << a << " ";
 		blocks[i].x = a + sprite.getPosition().x;
 		infile >> a;
 		blocks[i].y = a + sprite.getPosition().y;

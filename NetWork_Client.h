@@ -21,10 +21,12 @@ public:
 	void processDICE(sf::Packet&);
 	void processPLANE(sf::Packet&);
 
-	void processSTART(sf::Packet&);
+	void processSTART();
 	void processSETNUMBER(sf::Packet&);
 	void processSETNAME(sf::Packet&);
 	void processCCHAT(sf::Packet&);
+	void processJOIN();
+	void processFULL();
 private:
 	Client() {}
 };

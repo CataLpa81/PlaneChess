@@ -138,17 +138,14 @@ void btnJoinGame::OnRelese()
 	packet << roomNumber << myName;
 	Client::Instance()->socket.send(packet); 
 
-	GP = GameScence::NETGAME2;
 
+	
 }
 
 void btnStartGame::OnRelese()
 {	
-	if (GameManagerClient::instance()->Player == GameManagerClient::RED)
-	{
 		sf::Uint32 data = START;
 		Client::Instance()->socket.send(&data, sizeof(sf::Uint32));
-	}
 		
 }
 

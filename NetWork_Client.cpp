@@ -5,11 +5,11 @@ extern sf::Mutex mutex;
 
 void Client::Run()
 {
-	socket.connect("localhost", 8888);
+	socket.connect("182.92.103.211", 8888);
 	std::cout << "Client launched" << std::endl;
 	clock.restart();
 
-	while (1)
+	while (window.isOpen())
 	{
 		sf::Packet packet;
 		sf::Uint32* data = (sf::Uint32*)malloc(sizeof(sf::Uint32));
@@ -26,7 +26,7 @@ void Client::Run()
 			processPLANE(packet);
 			break;
 		case CSTART:
-			processSTART(packet);
+			processSTART();
 			break;
 		case SETNUMBER:
 			socket.receive(packet);
@@ -39,6 +39,12 @@ void Client::Run()
 		case CCHAT:
 			socket.receive(packet);
 			processCCHAT(packet);
+			break;
+		case FULL:
+			processFULL();
+			break;
+		case JOIN:
+			processJOIN();
 			break;
 		default:
 			break;
@@ -57,7 +63,7 @@ void Client::processPLANE(sf::Packet& packet)
 		GameManagerClient::instance()->dice->Number);
 }
 
-void Client::processSTART(sf::Packet& packet)
+void Client::processSTART()
 {
 	GP = GameScence::NETGAME;
 }
@@ -109,3 +115,14 @@ void Client::processCCHAT(sf::Packet& packet)
 	ChatRoom::Instance()->addContent(s);
 	mutex.unlock();
 }
+
+void Client::processFULL()
+{
+	NetGame1_Scence::Instance()->DisPlayFULL();
+}
+
+void Client::processJOIN()
+{
+	GP = GameScence::NETGAME2;
+}
+
