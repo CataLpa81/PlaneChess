@@ -103,3 +103,14 @@ public:
 	virtual void OnPress();
 	virtual void OnRelese();
 };
+
+
+class btnSound :public Button
+{
+public:
+	btnSound() :Button("./data/UI/btn_mute.png") {}
+	virtual ~btnSound() {};
+	virtual void OnPress();
+	virtual void OnRelese();
+	
+};

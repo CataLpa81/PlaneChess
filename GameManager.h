@@ -37,6 +37,7 @@ public:
 	Dice* dice;
 	PlanePool* planepool;
 	btnBack btnB;
+	btnSound btnSd;
 	virtual void onNotify(Entity* entity_,MVCEvent event);
 	void GameUpdateLogic();
 	void GameInputLogic(sf::Event event);
@@ -47,6 +48,7 @@ private:
 		dice = Dice::instance();
 		planepool = PlanePool::instance();
 		btnB.setPosition(100, 50);
+		this->btnSd.setPosition(100, 100);
 	}
 
 
@@ -81,6 +83,7 @@ public:
 	void GameInputLogic(sf::Event event);
 	void GameRenderLogic();
 
+	btnSound btnSd;
 	ChatRoom* CR;
 	
 private:

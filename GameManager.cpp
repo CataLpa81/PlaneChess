@@ -5,6 +5,7 @@
 
 void GameManager::GameInputLogic(sf::Event event)
 {
+	this->btnSd.Input(event);
 	for (int i = 0;i < 3;i++)
 	{
 		switch (turn)
@@ -55,6 +56,7 @@ void GameManager::GameRenderLogic()
 	btnB.Render();
 	planepool->Render();
 	dice->Rander();
+	this->btnSd.Render();
 }
 
 void GameManager::onNotify(Entity* entity_,MVCEvent event)
@@ -78,6 +80,7 @@ void GameManager::onNotify(Entity* entity_,MVCEvent event)
 void GameManagerClient::GameInputLogic(sf::Event event)
 {
 	this->CR->Input(event);
+	this->btnSd.Input(event);
 	for (int i = 0;i < 3;i++)
 	{
 		switch (turn)
@@ -128,6 +131,7 @@ void GameManagerClient::GameRenderLogic()
 	planepool->Render();
 	dice->Rander();
 	CR->Render();
+	this->btnSd.Render();
 }
 
 void GameManagerClient::onNotify(Entity* entity_, MVCEvent event)
@@ -154,4 +158,5 @@ GameManagerClient::GameManagerClient()
 	planepool = Plane_ClientPool::instance();
 
 	CR->setPosition(700, 0);
+	this->btnSd.setPosition(100, 100);
 }

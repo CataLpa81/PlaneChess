@@ -1,5 +1,6 @@
 #include"ChatRoom.h"
 #include<iostream>
+#include"Audio.h"
 
 extern sf::Mutex mutex;
 extern sf::RenderWindow window;
@@ -34,6 +35,7 @@ void ChatRoom::addContent(sf::String s)
 
 	height += 1.5*t.getLocalBounds().height;
 	ContentList.push_back(t);
+	AudioManager::Instance()->Play("msg");
 	while (height > (texture.getSize().y - 110))
 	{
 		height -= 1.5*ContentList.front().getLocalBounds().height;

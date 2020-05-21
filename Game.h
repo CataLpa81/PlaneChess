@@ -12,6 +12,7 @@
 #include"Scence.h"
 #include"NetWork_Client.h"
 #include"NetWork_Server.h"
+#include"Audio.h"
 #define WIDTH 1200
 #define HEIGHT 800
 
@@ -52,6 +53,8 @@ public:
 	BeginInterface* bi;
 	NetGame2_Scence* NS2;
 	NetGame1_Scence* NS1;
+	AudioManager* AM;
+
 
 	bool IsServer=false;
 	bool IsClient=false;

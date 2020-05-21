@@ -2,6 +2,7 @@
 #include"ChessBoard.h"
 #include<fstream>
 #include<math.h>
+#include"Audio.h"
 #define PI 3.1415926
 
 
@@ -169,9 +170,11 @@ void Plane::move(int step)
 			this->pos = stepcount - 50 + pos_final_start-1;
 		
 		}
+		AudioManager::Instance()->Play("plane");
 		this->notify(this, MVCEvent::DICETIME);
 		
 		doFly = true;
+		
 	}
 	else if (state == HOME&&step == 6)
 	{
@@ -179,7 +182,7 @@ void Plane::move(int step)
 		state = READY;
 		this->x = ready_pos_x;
 		this->y = ready_pos_y;
-		
+		AudioManager::Instance()->Play("plane");
 		setrotation();
 		//给观察者发送消息，飞机操作完毕，开始骰子操作
 		this->notify(this,MVCEvent::DICETIME);
@@ -196,6 +199,7 @@ void Plane::move(int step)
 			this->notify(this, MVCEvent::DICETIME);
 			//给观察者发送消息，飞机操作完毕，告知棋盘
 			doFly = true;
+			AudioManager::Instance()->Play("plane");
 		}
 		
 	}
@@ -209,6 +213,7 @@ void Plane::move(int step)
 			pos = pos_final_end - (pos - pos_final_end);
 		}
 		//给观察者发送消息，飞机操作完毕，开始骰子操作
+		AudioManager::Instance()->Play("plane");
 		this->notify(this,MVCEvent::DICETIME);
 	}
 

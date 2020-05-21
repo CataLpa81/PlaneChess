@@ -1,5 +1,6 @@
 #include"Dice_Client.h"
 #include<iostream>
+#include"Audio.h"
 
 
 int Dice_Client::createNumber()
@@ -39,6 +40,7 @@ void Dice_Client::input(sf::Event& event)
 			&& this->hitbox.contains((sf::Vector2f)sf::Mouse::getPosition(window)))
 		{
 			AnimCTL.SwitchAnimation("dicing");
+			AudioManager::Instance()->Play("dice");
 			clock.restart();
 			createNumber();
 			doDice_Client = false;

@@ -12,6 +12,8 @@ BeginInterface::BeginInterface()
 	this->sprite.setTexture(texture);
 	this->btnLG.setPosition(600, 550);
 	this->btnNG.setPosition(600, 650);
+
+	this->btnSd.setPosition(100, 100);
 }
 
 void BeginInterface::Render()
@@ -19,12 +21,14 @@ void BeginInterface::Render()
 	window.draw(this->sprite);
 	btnLG.Render();
 	btnNG.Render();
+	btnSd.Render();
 }
 
 void BeginInterface::Input(Event event)
 {
 	btnLG.Input(event);
 	btnNG.Input(event);
+	btnSd.Input(event);
 }
 
 
@@ -55,6 +59,8 @@ NetGame2_Scence::NetGame2_Scence()
 	Lred.SetPosition(1010, 335);
 	Lyellow.SetPosition(1010, 712);
 	Lblue.SetPosition(701, 712);
+
+	this->btnSd.setPosition(100, 100);
 }
 
 
@@ -62,6 +68,7 @@ void NetGame2_Scence::Render()
 {
 	window.draw(this->sprite);
 	this->btnSG.Render();
+	this->btnSd.Render();
 	if (GameManagerClient::instance()->planepool->redPlane_Clientpool.playerName != "null")
 	{
 		window.draw(this->sRED);
@@ -96,6 +103,7 @@ void NetGame2_Scence::Render()
 void NetGame2_Scence::Input(Event event)
 {
 	this->btnSG.Input(event);
+	this->btnSd.Input(event);
 	
 }
 
@@ -126,6 +134,8 @@ NetGame1_Scence::NetGame1_Scence()
 	t1.setOrigin(t1.getLocalBounds().width / 2, t1.getLocalBounds().height / 2);
 	t1.setPosition(600, 700);
 
+	this->btnSd.setPosition(100, 100);
+
 	t1.setFillColor(c);
 
 }
@@ -138,6 +148,7 @@ void NetGame1_Scence::Render()
 	this->btnB.Render();
 	this->IB1.Render();
 	this->IB2->Render();
+	this->btnSd.Render();
 
 
 	if (isFull)
@@ -160,6 +171,7 @@ void NetGame1_Scence::Input(Event event)
 	this->btnJG.Input(event);
 	this->IB1.Input(event);
 	this->IB2->Input(event);
+	this->btnSd.Input(event);
 }
 
 void NetGame1_Scence::DisPlayFULL()

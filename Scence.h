@@ -27,6 +27,8 @@ private:
 	Sprite sprite;
 	btnLocalGame btnLG;
 	btnNetGame btnNG;
+	btnSound btnSd;
+
 };
 
 
@@ -56,6 +58,7 @@ private:
 	Sprite sprite;
 	btnJoinGame btnJG;
 	btnBack btnB;
+	btnSound btnSd;
 	
 	Clock c;
 
@@ -96,6 +99,7 @@ private:
 	Lable Lyellow;
 	Lable Lblue;
 	btnStartGame btnSG;
+	btnSound btnSd;
 	
 
 	NetGame2_Scence();

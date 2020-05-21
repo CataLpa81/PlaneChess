@@ -27,6 +27,10 @@ void Game::Initial()
 	NS1 = NetGame1_Scence::Instance();
 	NS2 = NetGame2_Scence::Instance();
 	
+	AM = AudioManager::Instance();
+	AM->SetVolume("BGM", 100);
+	AM->Play("BGM");
+
 	gmc = GameManagerClient::instance();
 	gmc->dice->addObserver(gmc);
 	gmc->planepool->AddObserver(gmc);

@@ -1,5 +1,6 @@
 #include"Plane_Client.h"
 #include"ChessBoard.h"
+#include"Audio.h"
 #include<fstream>
 #include<math.h>
 #define PI 3.1415926
@@ -169,7 +170,7 @@ void Plane_Client::move(int step)
 
 		}
 		this->notify(this, MVCEvent::DICETIME);
-
+		AudioManager::Instance()->Play("plane");
 		doFly = true;
 	}
 	else if (state == HOME && step == 6)
@@ -178,7 +179,7 @@ void Plane_Client::move(int step)
 		state = READY;
 		this->x = ready_pos_x;
 		this->y = ready_pos_y;
-
+		AudioManager::Instance()->Play("plane");
 		setrotation();
 		//给观察者发送消息，飞机操作完毕，开始骰子操作
 		this->notify(this, MVCEvent::DICETIME);
@@ -195,6 +196,7 @@ void Plane_Client::move(int step)
 			this->notify(this, MVCEvent::DICETIME);
 			//给观察者发送消息，飞机操作完毕，告知棋盘
 			doFly = true;
+			AudioManager::Instance()->Play("plane");
 			std::cout << "planenumber" << this->PPUNumber << "goONboard" << std::endl;
 		}
 
@@ -210,6 +212,7 @@ void Plane_Client::move(int step)
 		}
 		//给观察者发送消息，飞机操作完毕，开始骰子操作
 		this->notify(this, MVCEvent::DICETIME);
+		AudioManager::Instance()->Play("plane");
 	}
 
 

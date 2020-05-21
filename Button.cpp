@@ -1,6 +1,6 @@
 #include"Button.h"
 #include"Game.h"
-
+#include"Audio.h"
 #include<sstream>
 
 
@@ -181,4 +181,14 @@ void btnSend::OnRelese()
 	ChatRoom::Instance()->Inputbox.Clear();
 
 	
+}
+
+void btnSound::OnPress()
+{
+
+}
+
+void btnSound::OnRelese()
+{
+	AudioManager::Instance()->SetMute();
 }
